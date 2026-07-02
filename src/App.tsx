@@ -52,7 +52,7 @@ export default function App() {
           tagline2={
             <>
               {t('hero.tagline2')}
-              <span className="text-[#a86d23] inline-block">
+              <span className="text-gradient-glow inline-block">
                 {t('hero.tagline2.highlight')}
               </span>
             </>
@@ -79,7 +79,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Quiénes somos"
-          className="relative min-h-screen z-10 flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] dots-pattern border-t border-(--color-border)"
+          className="relative z-10 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
           {/* Animated floating mesh gradients for extreme premium design */}
@@ -115,7 +115,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Servicios"
-          className="relative min-h-screen z-20 flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] dots-pattern border-t border-(--color-border)"
+          className="relative z-20 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-foreground)' }}
         >
 
@@ -162,7 +162,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Proceso"
-          className="relative min-h-screen z-30 flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] dots-pattern border-t border-[var(--color-border)]"
+          className="relative z-30 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
           style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-foreground)' }}
         >
 
@@ -198,7 +198,7 @@ export default function App() {
         id="portfolio"
         aria-label="Portafolio"
         style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
-        className="relative min-h-screen z-40 w-full overflow-x-hidden px-[4vw] pt-[clamp(5rem,8vw,6rem)] pb-[clamp(3rem,8vw,6rem)] dots-pattern border-t border-[var(--color-border)]"
+        className="relative z-40 w-full overflow-x-hidden px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
       >
 
         <div className="mb-8 flex flex-col gap-4">
@@ -228,7 +228,7 @@ export default function App() {
         id="cotizador"
         aria-label="Calculadora de presupuesto"
         style={{ backgroundColor: '#1a1a1a', color: 'var(--color-foreground)' }}
-        className="relative min-h-screen z-50 w-full px-[4vw] py-[clamp(5rem,10vw,8rem)] dots-pattern border-t border-[var(--color-border)]"
+        className="relative z-50 w-full px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
       >
         {/* Visual cosmic background orbs */}
 
@@ -256,7 +256,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Resultados"
-          className="relative min-h-screen z-[60] flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] dots-pattern border-t border-[var(--color-border)]"
+          className="relative z-[60] flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
           style={{ background: 'var(--color-surface-2)', color: 'var(--color-foreground)' }}
         >
 
@@ -302,7 +302,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Preguntas Frecuentes"
-          className="relative min-h-screen z-[70] flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] dots-pattern border-t border-(--color-border)"
+          className="relative z-[70] flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
 
@@ -335,7 +335,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Llamada a la acción y contacto"
-          className="relative min-h-screen z-80 flex w-full flex-col justify-between gap-6 px-[4vw] pt-[clamp(5rem,8vw,4vw)] pb-[4vw] overflow-hidden border-t border-(--color-border)"
+          className="relative z-80 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 overflow-hidden border-t border-(--color-border)"
           style={{ backgroundColor: '#000000', color: 'var(--color-foreground)' }}
         >
           {/* Background Paths effect */}
@@ -395,58 +395,66 @@ export default function App() {
       {/* ══════════════════════════════════════════════════════════════
           Footer
          ══════════════════════════════════════════════════════════════ */}
-      <footer className="relative z-90 flex flex-col gap-4 bg-(--color-surface-2) border-t border-(--color-border) px-[4vw] py-8 text-sm text-(--color-muted)">
-        <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-2">
-              <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-7 w-7 rounded-full object-cover bg-white" />
-              <span className="text-base font-black uppercase tracking-tight text-(--color-foreground)">
-                {t('footer.brandName')}
-              </span>
-            </div>
-            <p className="max-w-[30ch] text-xs leading-relaxed text-(--color-muted)">
-              {t('footer.description')}
+      <footer className="relative z-90 flex flex-col gap-4 bg-(--color-surface-2) border-t border-(--color-border) px-[4vw] py-12 text-sm text-(--color-muted)">
+        <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-12 lg:flex-row lg:justify-between">
+          
+          {/* Column 1: Logo (Standalone, large, centered vertically) */}
+          <div className="flex shrink-0 items-center justify-center lg:justify-start">
+            <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-28 w-28 md:h-36 md:w-36 rounded-full object-cover bg-white shadow-2xl" />
+          </div>
+
+          {/* Column 2: Brand Text */}
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left space-y-4 max-w-[320px]">
+            <span className="text-2xl md:text-3xl font-black uppercase tracking-tight text-(--color-foreground)">
+              {t('footer.brandName')}
+            </span>
+            <p className="text-xs leading-relaxed text-(--color-muted)">
+              Desarrollo de software y aplicaciones móviles de alto impacto diseñadas para digitalizar y automatizar operaciones comerciales.
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 mt-2">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.8)]" />
               <span className="text-[9px] font-bold uppercase tracking-widest text-green-600">
-                {t('footer.status')}
+                Servicios disponibles y operando
               </span>
             </div>
           </div>
 
-          <div className="flex justify-center">
-            <SocialIcons />
+          {/* Column 3: Social Icons Vertical */}
+          <div className="flex shrink-0 items-center justify-center">
+            <SocialIcons vertical={false} className="md:!flex-col" />
           </div>
 
-          <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3">
-            <div className="space-y-2.5">
-              <p className="text-[9px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.nav.title')}</p>
-              <ul className="space-y-1.5 text-xs text-(--color-muted)">
-                <li><a href="#quienes-somos" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.about')}</a></li>
-                <li><a href="#servicios" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.services')}</a></li>
-                <li><a href="#proceso" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.process')}</a></li>
+          {/* Column 4: Navigation Links (Side-by-side on desktop, stacked on mobile) */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
+            <div className="flex flex-col items-center sm:items-start space-y-3">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Navegación</p>
+              <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
+                <li><a href="#quienes-somos" className="hover:text-(--color-accent) transition-colors duration-200">Nosotros</a></li>
+                <li><a href="#servicios" className="hover:text-(--color-accent) transition-colors duration-200">Servicios</a></li>
+                <li><a href="#proceso" className="hover:text-(--color-accent) transition-colors duration-200">Metodología</a></li>
               </ul>
             </div>
-            <div className="space-y-2.5">
-              <p className="text-[9px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.tools.title')}</p>
-              <ul className="space-y-1.5 text-xs text-(--color-muted)">
-                <li><a href="#cotizador" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.calculator')}</a></li>
-                <li><a href="#faq" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.portfolio')}</a></li>
-                <li><a href="#contacto" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.contact')}</a></li>
+
+            <div className="flex flex-col items-center sm:items-start space-y-3">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Herramientas</p>
+              <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
+                <li><a href="#cotizador" className="hover:text-(--color-accent) transition-colors duration-200">Cotizador</a></li>
+                <li><a href="#portfolio" className="hover:text-(--color-accent) transition-colors duration-200">Portfolio</a></li>
+                <li><a href="#contacto" className="hover:text-(--color-accent) transition-colors duration-200">Contacto</a></li>
               </ul>
             </div>
-            <div className="space-y-2.5 col-span-2 sm:col-span-1">
-              <p className="text-[9px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.legal.title')}</p>
-              <ul className="space-y-1.5 text-xs text-(--color-muted)">
-                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">{t('footer.legal.terms')}</a></li>
-                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">{t('footer.legal.privacy')}</a></li>
+
+            <div className="flex flex-col items-center sm:items-start space-y-3">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Legal</p>
+              <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
+                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">Términos de Servicio</a></li>
+                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">Política de Privacidad</a></li>
               </ul>
             </div>
           </div>
         </div>
 
-        <div className="mx-auto w-full max-w-[1000px] h-px bg-(--color-border) my-2" />
+        <div className="mx-auto w-full max-w-[1000px] h-px bg-(--color-border) my-6" />
 
         <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center justify-between gap-3 md:flex-row text-[11px] text-(--color-muted)">
           <span>© {new Date().getFullYear()} Gonzalo Martínez. Todos los derechos reservados.</span>

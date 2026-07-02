@@ -143,7 +143,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
         )}
       >
         {/* Drawer Header */}
-        <div className="flex items-center justify-between border-b border-white/5 pb-5">
+        <div className="shrink-0 flex items-center justify-between border-b border-white/5 pb-5">
           <div className="flex items-center gap-3 text-md font-black uppercase tracking-tight text-white">
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-transparent">
               <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-full w-full object-cover" />
@@ -160,91 +160,94 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
           </button>
         </div>
 
-        {/* Vertical Links List */}
-        <div className="mt-8 flex flex-col gap-1.5">
-          {navLinks.map((link) => (
-            <a
-              key={link.id}
-              href={`#${link.id}`}
-              onClick={(e) => handleScrollTo(e, link.id)}
-              className={cn(
-                'group flex items-center justify-between rounded-xl px-4 py-3 text-lg font-bold tracking-wide uppercase transition-all duration-300',
-                activeSection === link.id
-                  ? 'bg-accent/10 border border-accent/20 text-accent'
-                  : 'text-neutral-400 border border-transparent hover:text-white hover:bg-white/5 hover:pl-5'
-              )}
-            >
-              <div className="flex items-center gap-3">
-                <span className={cn(
-                  'text-xs font-mono tracking-widest',
-                  activeSection === link.id ? 'text-accent' : 'text-neutral-600'
-                )}>
-                  {link.num}
+        {/* Scrollable Content Area */}
+        <div className="flex-1 overflow-y-auto flex flex-col pt-6 pb-2 -mr-2 pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+          {/* Vertical Links List */}
+          <div className="flex flex-col gap-1.5">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={`#${link.id}`}
+                onClick={(e) => handleScrollTo(e, link.id)}
+                className={cn(
+                  'group flex items-center justify-between rounded-xl px-4 py-3 text-lg font-bold tracking-wide uppercase transition-all duration-300',
+                  activeSection === link.id
+                    ? 'bg-accent/10 border border-accent/20 text-accent'
+                    : 'text-neutral-400 border border-transparent hover:text-white hover:bg-white/5 hover:pl-5'
+                )}
+              >
+                <div className="flex items-center gap-3">
+                  <span className={cn(
+                    'text-xs font-mono tracking-widest',
+                    activeSection === link.id ? 'text-accent' : 'text-neutral-600'
+                  )}>
+                    {link.num}
+                  </span>
+                  <span>{link.label}</span>
+                </div>
+                <ArrowUpRight className={cn(
+                  'h-4 w-4 opacity-0 transition-all duration-300',
+                  activeSection === link.id ? 'opacity-100 text-accent' : 'group-hover:opacity-100 group-hover:text-white'
+                )} />
+              </a>
+            ))}
+          </div>
+
+          {/* Drawer Bottom - Contact Cards */}
+          <div className="mt-8 flex flex-col gap-3 pb-4">
+            {/* Email Card (Blue) */}
+            <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-linear-to-b from-blue-500/8 to-blue-600/3 p-4 shadow-lg shadow-blue-500/5 shrink-0">
+              <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-blue-500/15 blur-xl pointer-events-none" />
+              
+              <div className="flex items-center justify-between mb-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-400">
+                  Formal / Asesoría
                 </span>
-                <span>{link.label}</span>
+                <Send className="h-4 w-4 text-blue-400 opacity-80" />
               </div>
-              <ArrowUpRight className={cn(
-                'h-4 w-4 opacity-0 transition-all duration-300',
-                activeSection === link.id ? 'opacity-100 text-accent' : 'group-hover:opacity-100 group-hover:text-white'
-              )} />
-            </a>
-          ))}
-        </div>
-
-        {/* Drawer Bottom - Contact Cards */}
-        <div className="mt-auto flex flex-col gap-3">
-          {/* Email Card (Blue) */}
-          <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-linear-to-b from-blue-500/8 to-blue-600/3 p-4 shadow-lg shadow-blue-500/5">
-            <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-blue-500/15 blur-xl pointer-events-none" />
-            
-            <div className="flex items-center justify-between mb-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-400">
-                Formal / Asesoría
-              </span>
-              <Send className="h-4 w-4 text-blue-400 opacity-80" />
-            </div>
-            
-            <h3 className="text-xs font-bold text-white mb-3">¿Prefieres un correo formal?</h3>
-            
-            <a
-              href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-blue-600 to-blue-500 py-2.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/35 active:translate-y-0 text-center"
-            >
-              📧 gonchimartinez9@gmail.com
-            </a>
-          </div>
-
-          {/* WhatsApp Card (Green) */}
-          <div className="relative overflow-hidden rounded-2xl border border-[#22c55e]/20 bg-linear-to-b from-[#22c55e]/8 to-[#16a34a]/3 p-4 shadow-lg shadow-green-500/5">
-            {/* Green glowing orb in background */}
-            <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-[#22c55e]/15 blur-xl pointer-events-none" />
-
-            <div className="flex items-center justify-between mb-3">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#22c55e]">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#22c55e]" />
-                Online / Disponible
-              </span>
-              <MessageCircle className="h-5 w-5 text-[#22c55e] opacity-80" />
+              
+              <h3 className="text-xs font-bold text-white mb-3">¿Prefieres un correo formal?</h3>
+              
+              <a
+                href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-blue-600 to-blue-500 py-2.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/35 active:translate-y-0 text-center"
+              >
+                📧 gonchimartinez9@gmail.com
+              </a>
             </div>
 
-            <h3 className="text-sm font-bold text-white mb-1">¿Tienes una idea en mente?</h3>
-            <p className="text-[11px] text-neutral-400 leading-relaxed mb-4">
-              Hablemos directamente por WhatsApp. Te asesoro en la arquitectura, plazos y costos de tu proyecto sin compromiso.
-            </p>
+            {/* WhatsApp Card (Green) */}
+            <div className="relative overflow-hidden rounded-2xl border border-[#22c55e]/20 bg-linear-to-b from-[#22c55e]/8 to-[#16a34a]/3 p-4 shadow-lg shadow-green-500/5 shrink-0">
+              {/* Green glowing orb in background */}
+              <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-[#22c55e]/15 blur-xl pointer-events-none" />
 
-            <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#22c55e] to-[#16a34a] py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-green-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-500/35 active:translate-y-0 text-center"
-            >
-              💬 Chat: 381 624 2482
-            </a>
-          </div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#22c55e]">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#22c55e]" />
+                  Online / Disponible
+                </span>
+                <MessageCircle className="h-5 w-5 text-[#22c55e] opacity-80" />
+              </div>
 
-          <div className="mt-4 flex justify-between text-[10px] text-neutral-500 px-1">
-            <span>Tasa de respuesta: ~15m</span>
-            <span>Estudio Gonzalo M.</span>
+              <h3 className="text-sm font-bold text-white mb-1">¿Tienes una idea en mente?</h3>
+              <p className="text-[11px] text-neutral-400 leading-relaxed mb-4">
+                Hablemos directamente por WhatsApp. Te asesoro en la arquitectura, plazos y costos de tu proyecto sin compromiso.
+              </p>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#22c55e] to-[#16a34a] py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-green-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-500/35 active:translate-y-0 text-center"
+              >
+                💬 Chat: 381 624 2482
+              </a>
+            </div>
+
+            <div className="mt-4 flex justify-between text-[10px] text-neutral-500 px-1 shrink-0">
+              <span>Tasa de respuesta: ~15m</span>
+              <span>Estudio Gonzalo M.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -252,7 +255,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── FLOATING PULSING WHATSAPP BUTTON (BOTTOM-RIGHT) ── */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-6 right-6 z-35 flex h-14 w-14 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
+        className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
         aria-label="Contactar por WhatsApp"
         style={{
           boxShadow: '0 8px 32px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255,255,255,0.25)',

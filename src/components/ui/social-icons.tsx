@@ -34,11 +34,11 @@ const socials = [
   },
 ]
 
-export function SocialIcons() {
+export function SocialIcons({ vertical = false, className = '' }: { vertical?: boolean, className?: string }) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   return (
-    <div className="relative flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-neutral-950 border border-white/8">
+    <div className={`relative flex items-center gap-0.5 px-1.5 py-1.5 rounded-2xl bg-neutral-950 border border-white/8 ${vertical ? 'flex-col' : 'flex-row'} ${className}`}>
       <div className="absolute inset-0 rounded-2xl bg-linear-to-b from-white/3 to-transparent pointer-events-none" />
 
       {socials.map((social, index) => (
@@ -53,7 +53,7 @@ export function SocialIcons() {
           aria-label={social.name}
         >
           <span
-            className={`absolute inset-1 rounded-lg bg-white/8sition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            className={`absolute inset-1 rounded-lg bg-white/8 transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 scale-100" : "opacity-0 scale-90"
               }`}
           />
 
@@ -70,14 +70,19 @@ export function SocialIcons() {
           />
 
           <span
-            className={`absolute -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-lg bg-white text-neutral-950 text-[11px] font-medium whitespace-nowrap transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1 pointer-events-none"
-              }`}
+            className={`absolute ${vertical ? 'left-12 top-1/2 -translate-y-1/2 px-2 py-1' : '-top-10 left-1/2 -translate-x-1/2 px-2.5 py-1'} rounded-lg bg-white text-neutral-950 text-[11px] font-medium whitespace-nowrap transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100" : "opacity-0 pointer-events-none"
+              } ${!vertical && hoveredIndex === index ? "translate-y-0" : ""} ${!vertical && hoveredIndex !== index ? "translate-y-1" : ""}`}
           >
             {social.name}
-            <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 rotate-45 bg-white" />
+            {vertical ? (
+              <span className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 size-2 rotate-45 bg-white" />
+            ) : (
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 rotate-45 bg-white" />
+            )}
           </span>
         </a>
       ))}
     </div>
   )
 }
+

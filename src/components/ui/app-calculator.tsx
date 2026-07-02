@@ -39,7 +39,7 @@ export function AppCalculator() {
 
     // Admin Panel option
     if (needAdmin) {
-      basePrice += 300
+      basePrice += 200
       devWeeks += 1
     }
 
@@ -51,11 +51,11 @@ export function AppCalculator() {
 
     // Features
     if (features.auth) {
-      basePrice += 150
+      basePrice += 100
       devWeeks += 0.5
     }
     if (features.payments) {
-      basePrice += 250
+      basePrice += 150
       devWeeks += 0.5
     }
     if (features.notifications) {
@@ -63,11 +63,11 @@ export function AppCalculator() {
       devWeeks += 0.5
     }
     if (features.chat) {
-      basePrice += 200
+      basePrice += 150
       devWeeks += 1
     }
     if (features.ai) {
-      basePrice += 350
+      basePrice += 150
       devWeeks += 1
     }
 
@@ -116,8 +116,10 @@ export function AppCalculator() {
   }, [projectType, needAdmin, screens, features, costs])
 
   return (
-    <div className="mx-auto max-w-5xl rounded-3xl border border-[#446471]/50 bg-linear-to-br from-[#747a75] to-[#446471] p-6 md:p-10 shadow-2xl font-bold **:font-bold">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-12">
+    <div className="mx-auto max-w-5xl rounded-3xl border border-white/5 bg-[#0a0a0a] bg-dots-pattern p-6 md:p-10 shadow-[0_0_50px_rgba(34,197,94,0.05)] font-bold **:font-bold relative overflow-hidden">
+      {/* Subtle green ambient glow */}
+      <div className="absolute -top-40 -right-40 h-[400px] w-[400px] rounded-full bg-green-500/10 blur-[120px] pointer-events-none" />
+      <div className="relative z-10 grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-12">
         {/* Left Column: Form Controls */}
         <div className="space-y-8">
           {/* Section title */}
@@ -175,7 +177,7 @@ export function AppCalculator() {
             <div className="grid grid-cols-2 gap-3">
               {[
                 { value: false, label: 'No Requiere', desc: 'Gestión estándar' },
-                { value: true, label: 'Incluir Panel Admin', desc: 'Base de datos y ABM (+$300)' },
+                { value: true, label: 'Incluir Panel Admin', desc: 'Base de datos y ABM (+$200)' },
               ].map((item) => (
                 <button
                   key={item.label}
@@ -231,11 +233,11 @@ export function AppCalculator() {
             </label>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               {[
-                { key: 'auth', label: 'Registro / Login', desc: 'Email, Google e historial (+$150)', icon: Shield },
-                { key: 'payments', label: 'Cobros e Integraciones', desc: 'Stripe, PayPal, MercadoPago (+$250)', icon: CreditCard },
+                { key: 'auth', label: 'Registro / Login', desc: 'Email, Google e historial (+$100)', icon: Shield },
+                { key: 'payments', label: 'Cobros e Integraciones', desc: 'Stripe, PayPal, MercadoPago (+$150)', icon: CreditCard },
                 { key: 'notifications', label: 'Notificaciones Push', desc: 'Alertas en tiempo real (+$100)', icon: Bell },
-                { key: 'chat', label: 'Chat Integrado', desc: 'Mensajería y soporte interno (+$200)', icon: MessageSquare },
-                { key: 'ai', label: 'Motores de IA', desc: 'Automatización y asistentes GPT (+$350)', icon: Brain },
+                { key: 'chat', label: 'Chat Integrado', desc: 'Mensajería y soporte interno (+$150)', icon: MessageSquare },
+                { key: 'ai', label: 'Motores de IA', desc: 'Automatización y asistentes GPT (+$150)', icon: Brain },
               ].map((item) => {
                 const Icon = item.icon
                 const isSelected = (features as any)[item.key]
@@ -268,69 +270,73 @@ export function AppCalculator() {
         </div>
 
         {/* Right Column: Dynamic Price Summary Block */}
-        <div className="flex flex-col justify-between rounded-2xl bg-[#7c8f7b] p-6 md:p-8 shadow-sm">
-          <div className="space-y-6">
-            <span className="rounded-full bg-green-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-green-900">
-              ● Presupuesto en tiempo real
+        <div className="relative flex flex-col justify-between rounded-2xl border border-white/5 bg-[#111] p-6 md:p-8 shadow-2xl overflow-hidden">
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-linear-to-b from-green-500/5 to-transparent pointer-events-none" />
+          
+          <div className="relative z-10 space-y-6">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-green-500/10 border border-green-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-green-400 shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500" />
+              Presupuesto en tiempo real
             </span>
 
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-[#090700]/70">
+              <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">
                 Inversión Estimada
               </p>
-              <h4 className="mt-3 text-3xl font-black text-[#090700] md:text-5xl leading-none tracking-tight">
+              <h4 className="mt-3 text-3xl font-black text-white md:text-5xl leading-none tracking-tight">
                 ${costs.minPrice.toLocaleString()}{' '}
-                <span className="text-lg md:text-2xl font-normal text-[#090700]/70">
+                <span className="text-lg md:text-2xl font-normal text-neutral-400">
                   - ${costs.maxPrice.toLocaleString()}
                 </span>
-                <span className="ml-1 text-sm font-bold text-[#090700]/70 uppercase tracking-widest block mt-2">
+                <span className="ml-1 text-sm font-bold text-neutral-500 uppercase tracking-widest block mt-2">
                   USD final
                 </span>
               </h4>
             </div>
 
-            <div className="h-px w-full bg-[#090700]/20" />
+            <div className="h-px w-full bg-white/10" />
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#090700]/70">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
                   Tiempo de Entrega
                 </p>
-                <p className="mt-1 text-base font-extrabold text-[#090700]">
+                <p className="mt-1 text-base font-extrabold text-white">
                   {costs.minWeeks} a {costs.maxWeeks} semanas
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-[#090700]/70">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
                   Metodología
                 </p>
-                <p className="mt-1 text-base font-extrabold text-[#090700]">
+                <p className="mt-1 text-base font-extrabold text-white">
                   Scrum Ágil (Gonzalo M.)
                 </p>
               </div>
             </div>
 
-            <div className="h-px w-full bg-[#090700]/20" />
+            <div className="h-px w-full bg-white/10" />
 
             <div className="space-y-2">
-              <p className="text-[10px] font-black uppercase tracking-wider text-[#090700]/90">
+              <p className="text-[10px] font-black uppercase tracking-wider text-neutral-300">
                 ¿Qué incluye tu presupuesto?
               </p>
-              <ul className="space-y-1.5 text-xs text-[#090700]/80">
-                <li>✓ Código fuente y repositorio en Github</li>
-                <li>✓ Estructura de vistas optimizada</li>
-                <li>✓ Configuración inicial de hosting</li>
-                <li>✓ Soporte técnico directo por 30 días</li>
+              <ul className="space-y-1.5 text-xs text-neutral-400">
+                <li className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-500" /> Código fuente y repositorio (Github)</li>
+                <li className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-500" /> Estructura de vistas optimizada</li>
+                <li className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-500" /> Configuración inicial de hosting</li>
+                <li className="flex items-center gap-1.5"><CheckCircle className="h-3.5 w-3.5 text-green-500" /> Soporte técnico directo por 30 días</li>
               </ul>
             </div>
           </div>
 
-          <div className="mt-8 space-y-3">
+          <div className="relative z-10 mt-8 space-y-3">
             <Button
               asChild
               variant="primary"
               size="xl"
-              className="w-full justify-center text-sm font-bold shadow-md bg-[#25D366] hover:bg-[#25D366]/90 text-white"
+              className="w-full justify-center text-sm font-bold shadow-md bg-[#22c55e] hover:bg-[#16a34a] text-white border-0"
             >
               <a
                 href={whatsappUrl}
@@ -341,7 +347,7 @@ export function AppCalculator() {
                 💬 Enviar cotización por WhatsApp
               </a>
             </Button>
-            <p className="text-center text-[10px] text-[#090700]/60">
+            <p className="text-center text-[10px] text-neutral-500">
               Análisis y asesoramiento 100% gratuito sin compromiso.
             </p>
           </div>

@@ -9,9 +9,9 @@ export const en = {
   "nav.language": "ES",
   
   // Hero
-  "hero.brandName": "Gonzalo Martínez",
+  "hero.brandName": "CreApp",
   "hero.tagline1": "I develop the ideal app",
-  "hero.tagline2": "to ",
+  "hero.tagline2": "designed to ",
   "hero.tagline2.highlight": "boost your business.",
   "hero.cardHeading": "Custom digital solutions: mobile apps, desktop and web systems that drive conversion and digitize your business.",
   "hero.cardDescription": "We design and develop high-impact, efficient, and 100% customized digital solutions for your operations.",
@@ -25,8 +25,8 @@ export const en = {
   // About
   "about.label": "01 — About us",
   "about.title": "Code With Purpose",
-  "about.description": "Hi, I'm Gonzalo Martínez. As a semi-junior developer, I specialize in building robust applications and immersive interfaces. I help businesses sell more and organize efficiently by digitizing their operations.",
-  "about.location": "Buenos Aires, Argentina",
+  "about.description": "Fullstack developer focusing on the JavaScript ecosystem (MERN stack) with over 3 years of experience building and deploying complete web platforms for real clients. Advanced student of the Software Development and Quality Technology degree (UNSTA).",
+  "about.location": "Tucumán, Argentina",
   "about.role": "Fullstack Developer",
 
   // Services

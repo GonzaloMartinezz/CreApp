@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
@@ -203,6 +203,9 @@ export function CinematicLandingHero({
   const mockupRef = useRef<HTMLDivElement>(null);
   const requestRef = useRef<number>(0);
 
+  const [showDatePicker, setShowDatePicker] = useState(false);
+  const [selectedDate, setSelectedDate] = useState("");
+
   // 1. High-Performance Mouse Interaction Logic (Using requestAnimationFrame)
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -317,44 +320,77 @@ export function CinematicLandingHero({
       </div>
 
       {/* BACKGROUND LAYER: Hero Texts */}
-      <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 will-change-transform transform-style-3d">
+      <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 mt-24 md:mt-0 will-change-transform transform-style-3d">
         <h1 className="text-track gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2 pb-4">
           {tagline1}
         </h1>
-        <h1 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-5xl md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pb-4">
+        <h1 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[2.8rem] leading-none md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pb-4">
           {tagline2}
         </h1>
       </div>
 
       {/* BACKGROUND LAYER 2: Tactile CTA Buttons */}
       <div className="cta-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 gsap-reveal pointer-events-auto will-change-transform">
-        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-10 mt-8 lg:mb-16 lg:mt-12 tracking-tight text-silver-matte">
+        <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-8 mt-6 lg:mb-12 lg:mt-10 tracking-tight text-silver-matte max-w-6xl mx-auto px-4">
           {ctaHeading}
         </h2>
-        <p className="text-muted-foreground text-lg md:text-xl mb-12 max-w-xl mx-auto font-light leading-relaxed">
+        <p className="text-muted-foreground text-lg md:text-xl mb-12 max-w-4xl mx-auto font-light leading-relaxed px-4 text-balance">
           {ctaDescription}
         </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center">
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center min-h-[80px]">
           <button 
             onClick={onWhatsAppClick}
-            className="btn-modern-light flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2"
+            className="flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_10px_24px_-4px_rgba(37,211,102,0.5)] transition-all duration-300 hover:-translate-y-1"
           >
-            <MessageCircle className="w-6 h-6 text-[#25D366] transition-transform group-hover:scale-110" />
+            <MessageCircle className="w-6 h-6 text-white transition-transform group-hover:scale-110" />
             <div className="text-left">
-              <div className="text-[10px] font-bold tracking-wider text-neutral-500 uppercase mb-[-2px]">Contactar por</div>
+              <div className="text-[10px] font-bold tracking-wider text-white/80 uppercase mb-[-2px]">Contactar por</div>
               <div className="text-xl font-bold leading-none tracking-tight">WhatsApp</div>
             </div>
           </button>
           
-          <button 
-            className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-background"
-          >
-            <Calendar className="w-6 h-6 text-white transition-transform group-hover:scale-110" />
-            <div className="text-left">
-              <div className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase mb-[-2px]">Agendar una</div>
-              <div className="text-xl font-bold leading-none tracking-tight">Llamada</div>
+          {showDatePicker ? (
+            <div className="btn-modern-dark flex flex-col sm:flex-row items-center justify-center gap-3 px-6 py-3 rounded-[1.25rem] animate-in fade-in zoom-in duration-300">
+              <input 
+                type="datetime-local" 
+                className="bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 w-full sm:w-auto"
+                value={selectedDate}
+                onChange={(e) => setSelectedDate(e.target.value)}
+              />
+              <div className="flex gap-2 w-full sm:w-auto">
+                <button 
+                  onClick={() => setShowDatePicker(false)}
+                  className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white transition-colors"
+                >
+                  Cancelar
+                </button>
+                <button 
+                  onClick={() => {
+                    if(!selectedDate) return;
+                    const dateObj = new Date(selectedDate);
+                    const formattedDate = dateObj.toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' });
+                    const message = `Hola Gonzalo! Me gustaría agendar una llamada de consultoría para el día ${formattedDate}.`;
+                    window.open(`https://wa.me/5493816242482?text=${encodeURIComponent(message)}`, '_blank');
+                    setShowDatePicker(false);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold shadow-lg transition-colors w-full sm:w-auto"
+                >
+                  Confirmar
+                </button>
+              </div>
             </div>
-          </button>
+          ) : (
+            <button 
+              onClick={() => setShowDatePicker(true)}
+              className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-background"
+            >
+              <Calendar className="w-6 h-6 text-white transition-transform group-hover:scale-110" />
+              <div className="text-left">
+                <div className="text-[10px] font-bold tracking-wider text-neutral-400 uppercase mb-[-2px]">Agendar una</div>
+                <div className="text-xl font-bold leading-none tracking-tight">Llamada</div>
+              </div>
+            </button>
+          )}
         </div>
       </div>
 
@@ -370,7 +406,7 @@ export function CinematicLandingHero({
           <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
             
             {/* 1. TOP (Mobile) / RIGHT (Desktop): BRAND NAME */}
-            <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full translate-x-4 lg:translate-x-24 xl:translate-x-32">
+            <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full mt-16 md:mt-0 translate-x-0 lg:translate-x-24 xl:translate-x-32 opacity-40 blur-[1px] md:opacity-100 md:blur-none">
               <h2 className="text-6xl md:text-[5rem] lg:text-[5rem] xl:text-[6rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0 flex flex-col items-center lg:items-end">
                 <span className="block">{brandName.split(' ')[0]}</span>
                 <span className="block lg:-mt-2">{brandName.split(' ')[1]}</span>
