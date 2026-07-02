@@ -22,28 +22,28 @@ const EFFECT_STYLES = `
   }
 
   .ch-silver-text {
-    background: linear-gradient(175deg, #FFFFFF 0%, rgba(250,250,250,0.45) 100%);
+    background: linear-gradient(175deg, var(--color-foreground) 0%, rgba(43,37,33,0.7) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    filter: drop-shadow(0 6px 16px rgba(255,255,255,0.08));
+    filter: drop-shadow(0 6px 16px rgba(139,94,52,0.15));
   }
 
   .ch-iphone-shell {
-    background-color: #111;
+    background-color: #f3f4f6;
     box-shadow:
-      inset 0 0 0 2px #52525B,
-      inset 0 0 0 7px #000,
-      0 60px 120px -15px rgba(0,0,0,0.99),
-      0 25px 40px -5px rgba(0,0,0,0.8);
+      inset 0 0 0 2px #d1d5db,
+      inset 0 0 0 7px #ffffff,
+      0 60px 120px -15px rgba(139,94,52,0.2),
+      0 25px 40px -5px rgba(139,94,52,0.15);
   }
 
   .ch-hw-side {
-    background: linear-gradient(90deg, #404040 0%, #171717 100%);
-    box-shadow: -2px 0 5px rgba(0,0,0,0.8),
-      inset -1px 0 1px rgba(255,255,255,0.15),
-      inset  1px 0 2px rgba(0,0,0,0.8);
-    border-left: 1px solid rgba(255,255,255,0.05);
+    background: linear-gradient(90deg, #e5e7eb 0%, #d1d5db 100%);
+    box-shadow: -2px 0 5px rgba(139,94,52,0.15),
+      inset -1px 0 1px rgba(255,255,255,0.8),
+      inset  1px 0 2px rgba(139,94,52,0.1);
+    border-left: 1px solid rgba(255,255,255,0.5);
   }
 
   .ch-screen-glare {
@@ -79,72 +79,72 @@ const EFFECT_STYLES = `
 
   .ch-btn-light {
     font-family: inherit; font-weight: 700; border: none; cursor: pointer;
-    background: linear-gradient(180deg, #FFFFFF 0%, #F1F5F9 100%);
-    color: #0F172A;
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.1),
-      0 12px 24px -4px rgba(0,0,0,0.28),
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+    color: var(--color-foreground);
+    box-shadow: 0 0 0 1px rgba(139,94,52,0.1), 0 2px 4px rgba(139,94,52,0.05),
+      0 12px 24px -4px rgba(139,94,52,0.15),
       inset 0  1px 1px rgba(255,255,255,1),
-      inset 0 -3px 6px rgba(0,0,0,0.05);
+      inset 0 -3px 6px rgba(139,94,52,0.05);
     transition: all 0.35s cubic-bezier(0.25,1,0.5,1);
   }
   .ch-btn-light:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 16px -2px rgba(0,0,0,0.16),
-      0 24px 40px -8px rgba(0,0,0,0.38),
+    box-shadow: 0 0 0 1px rgba(139,94,52,0.15), 0 8px 16px -2px rgba(139,94,52,0.1),
+      0 24px 40px -8px rgba(139,94,52,0.2),
       inset 0  1px 1px rgba(255,255,255,1),
-      inset 0 -3px 6px rgba(0,0,0,0.05);
+      inset 0 -3px 6px rgba(139,94,52,0.05);
   }
-  .ch-btn-light:active { transform: translateY(1px); background: #E2E8F0; }
+  .ch-btn-light:active { transform: translateY(1px); background: #F1F5F9; }
 
   .ch-btn-dark {
     font-family: inherit; font-weight: 700; border: none; cursor: pointer;
-    background: linear-gradient(180deg, #27272A 0%, #18181B 100%);
+    background: linear-gradient(180deg, var(--color-foreground) 0%, #2b2521 100%);
     color: #FFFFFF;
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.09), 0 2px 4px rgba(0,0,0,0.55),
-      0 12px 24px -4px rgba(0,0,0,0.88),
-      inset 0  1px 1px rgba(255,255,255,0.14),
-      inset 0 -3px 6px rgba(0,0,0,0.75);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 2px 4px rgba(139,94,52,0.2),
+      0 12px 24px -4px rgba(139,94,52,0.3),
+      inset 0  1px 1px rgba(255,255,255,0.15),
+      inset 0 -3px 6px rgba(0,0,0,0.3);
     transition: all 0.35s cubic-bezier(0.25,1,0.5,1);
   }
   .ch-btn-dark:hover {
     transform: translateY(-3px);
-    background: linear-gradient(180deg, #3F3F46 0%, #27272A 100%);
-    box-shadow: 0 0 0 1px rgba(255,255,255,0.13), 0 8px 16px -2px rgba(0,0,0,0.65),
-      0 24px 40px -8px rgba(0,0,0,1),
-      inset 0  1px 1px rgba(255,255,255,0.18),
-      inset 0 -3px 6px rgba(0,0,0,0.75);
+    background: linear-gradient(180deg, #3d2b1f 0%, var(--color-foreground) 100%);
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.15), 0 8px 16px -2px rgba(139,94,52,0.25),
+      0 24px 40px -8px rgba(139,94,52,0.4),
+      inset 0  1px 1px rgba(255,255,255,0.2),
+      inset 0 -3px 6px rgba(0,0,0,0.3);
   }
-  .ch-btn-dark:active { transform: translateY(1px); background: #18181B; }
+  .ch-btn-dark:active { transform: translateY(1px); background: #2b2521; }
 `
 
 /* ─── Props ─────────────────────────────────────────────────────────────── */
 export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement> {
-  brandName?:      string
-  tagline1?:       string
-  tagline2?:       string
-  cardHeading?:    string
-  metricValue?:    number
-  metricLabel?:    string
-  ctaHeading?:     string
+  brandName?: string
+  tagline1?: string
+  tagline2?: string
+  cardHeading?: string
+  metricValue?: number
+  metricLabel?: string
+  ctaHeading?: string
   ctaDescription?: string
 }
 
 /* ─── Component ─────────────────────────────────────────────────────────── */
 export function CinematicHero({
-  brandName      = 'CreAPP',
-  tagline1       = 'Creamos tu app ideal',
-  tagline2       = 'para tus clientes.',
-  cardHeading    = 'Experiencias digitales, redefinidas.',
-  metricValue    = 50,
-  metricLabel    = 'Apps Lanzadas',
-  ctaHeading     = 'Empezá tu proyecto.',
+  brandName = 'CreAPP',
+  tagline1 = 'Creamos tu app ideal',
+  tagline2 = 'para tus clientes.',
+  cardHeading = 'Experiencias digitales, redefinidas.',
+  metricValue = 50,
+  metricLabel = 'Apps Lanzadas',
+  ctaHeading = 'Empezá tu proyecto.',
   ctaDescription = 'Sin compromisos — solo buenas ideas y ejecución impecable.',
   className,
   ...props
 }: CinematicHeroProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const mockupRef    = useRef<HTMLDivElement>(null)
-  const rafRef       = useRef<number>(0)
+  const mockupRef = useRef<HTMLDivElement>(null)
+  const rafRef = useRef<number>(0)
 
   /* ── Mouse 3-D tilt on phone ── */
   useEffect(() => {
@@ -153,7 +153,7 @@ export function CinematicHero({
       cancelAnimationFrame(rafRef.current)
       rafRef.current = requestAnimationFrame(() => {
         if (!mockupRef.current) return
-        const xv = (e.clientX / window.innerWidth  - 0.5) * 2
+        const xv = (e.clientX / window.innerWidth - 0.5) * 2
         const yv = (e.clientY / window.innerHeight - 0.5) * 2
         gsap.to(mockupRef.current, {
           rotationY: xv * 12, rotationX: -yv * 12,
@@ -173,20 +173,20 @@ export function CinematicHero({
     const ctx = gsap.context(() => {
 
       /* — Initial states — */
-      gsap.set('.ch-t1',      { autoAlpha: 0, y: 55, filter: 'blur(18px)' })
-      gsap.set('.ch-t2',      { autoAlpha: 0, y: 55, filter: 'blur(18px)' })
+      gsap.set('.ch-t1', { autoAlpha: 0, y: 55, filter: 'blur(18px)' })
+      gsap.set('.ch-t2', { autoAlpha: 0, y: 55, filter: 'blur(18px)' })
       gsap.set('.ch-subdesc', { autoAlpha: 0, y: 24 })
-      gsap.set('.ch-phone',   { autoAlpha: 0, y: 130, rotationX: 48, z: -350, scale: 0.78 })
-      gsap.set('.ch-widget',  { autoAlpha: 0, y: 28, scale: 0.88 })
-      gsap.set('.ch-badge',   { autoAlpha: 0, y: 65, scale: 0.6, rotationZ: -10 })
-      gsap.set('.ch-brand',   { autoAlpha: 0, x: 55 })
-      gsap.set('.ch-cta',     { autoAlpha: 0, scale: 0.88, filter: 'blur(24px)' })
+      gsap.set('.ch-phone', { autoAlpha: 0, y: 130, rotationX: 48, z: -350, scale: 0.78 })
+      gsap.set('.ch-widget', { autoAlpha: 0, y: 28, scale: 0.88 })
+      gsap.set('.ch-badge', { autoAlpha: 0, y: 65, scale: 0.6, rotationZ: -10 })
+      gsap.set('.ch-brand', { autoAlpha: 0, x: 55 })
+      gsap.set('.ch-cta', { autoAlpha: 0, scale: 0.88, filter: 'blur(24px)' })
 
       /* — On-load intro (no scroll needed) — */
       gsap.timeline({ delay: 0.25 })
-        .to('.ch-t1',      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'expo.out' })
-        .to('.ch-t2',      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'expo.out' }, '-=0.9')
-        .to('.ch-subdesc', { autoAlpha: 1, y: 0, duration: 1,         ease: 'power3.out' }, '-=0.7')
+        .to('.ch-t1', { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'expo.out' })
+        .to('.ch-t2', { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 1.4, ease: 'expo.out' }, '-=0.9')
+        .to('.ch-subdesc', { autoAlpha: 1, y: 0, duration: 1, ease: 'power3.out' }, '-=0.7')
 
       /* — Scroll-driven timeline (one pinned section, everything inside) — */
       gsap.timeline({
@@ -207,7 +207,7 @@ export function CinematicHero({
           stagger: 0.12, ease: 'back.out(1.3)', duration: 1.5,
         }, '-=1.6')
         /* Ring fills + counter counts */
-        .to('.ch-ring',    { strokeDashoffset: 55, duration: 2, ease: 'power3.inOut' }, '-=1.2')
+        .to('.ch-ring', { strokeDashoffset: 55, duration: 2, ease: 'power3.inOut' }, '-=1.2')
         .to('.ch-counter', { innerHTML: metricValue, snap: { innerHTML: 1 }, duration: 2, ease: 'expo.out' }, '<')
         /* Badges pop in */
         .to('.ch-badge', {
@@ -244,16 +244,16 @@ export function CinematicHero({
         className,
       )}
       style={{
-        background: 'linear-gradient(145deg, #1f0a02 0%, #020b12 50%, #030107 100%)',
+        background: 'var(--color-background)',
         perspective: '1400px',
         fontFamily: 'var(--font-sans)',
-        color: '#fafafa',
+        color: 'var(--color-foreground)',
       }}
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: EFFECT_STYLES }} />
       <div className="ch-film-grain" aria-hidden />
-      <div className="ch-dot-grid"   aria-hidden />
+      <div className="ch-dot-grid" aria-hidden />
 
       {/* ── 3-column grid (left: text | center: phone | right: brand) ── */}
       <div className="relative z-10 grid h-full w-full max-w-[1400px] grid-cols-1 items-center gap-6 px-[4vw] py-10 lg:grid-cols-[1fr_auto_1fr] lg:gap-8 lg:py-0">
@@ -269,7 +269,7 @@ export function CinematicHero({
           <h1 className="ch-t2 ch-silver-text text-[clamp(2.6rem,5.5vw,5rem)] font-black leading-[0.92] tracking-[-0.03em]">
             {tagline2}
           </h1>
-          <p className="ch-subdesc mt-5 max-w-[34ch] text-[clamp(0.85rem,1.25vw,1rem)] leading-relaxed text-neutral-400">
+          <p className="ch-subdesc mt-5 max-w-[34ch] text-[clamp(0.85rem,1.25vw,1rem)] leading-relaxed text-(--color-muted)">
             {cardHeading}
           </p>
         </div>
@@ -286,25 +286,24 @@ export function CinematicHero({
           >
             {/* Hardware side buttons */}
             {[
-              { side: 'left',  top: 118, h: 24 },
-              { side: 'left',  top: 158, h: 44 },
-              { side: 'left',  top: 218, h: 44 },
+              { side: 'left', top: 118, h: 24 },
+              { side: 'left', top: 158, h: 44 },
+              { side: 'left', top: 218, h: 44 },
               { side: 'right', top: 168, h: 68 },
             ].map(({ side, top, h }, i) => (
               <div
                 key={i}
-                className={`ch-hw-side absolute w-[3px] ${
-                  side === 'left'
-                    ? '-left-[3px] rounded-l-sm'
-                    : '-right-[3px] scale-x-[-1] rounded-r-sm'
-                }`}
+                className={`ch-hw-side absolute w-[3px] ${side === 'left'
+                    ? 'left-[-3px] rounded-l-sm'
+                    : 'right-[-3px] scale-x-[-1] rounded-r-sm'
+                  }`}
                 style={{ top, height: h }}
                 aria-hidden
               />
             ))}
 
             {/* Screen */}
-            <div className="absolute inset-[7px] z-10 overflow-hidden rounded-[2.5rem] bg-[#07040d] text-white shadow-[inset_0_0_15px_rgba(0,0,0,1)]">
+            <div className="absolute inset-[7px] z-10 overflow-hidden rounded-[2.5rem] bg-[#2b2521] text-white shadow-[inset_0_0_15px_rgba(0,0,0,0.6)]">
               <div className="ch-screen-glare absolute inset-0 z-40 pointer-events-none" aria-hidden />
 
               {/* Dynamic island */}
@@ -345,13 +344,13 @@ export function CinematicHero({
                 {/* App widgets */}
                 {[
                   { color: 'rgba(255,122,0', stroke: '#ff7a00', d: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z', wL: 16, wD: 12 },
-                  { color: 'rgba(0,245,212',  stroke: '#00f5d4', d: 'M5 13l4 4L19 7', wL: 14, wD: 20 },
+                  { color: 'rgba(0,245,212', stroke: '#00f5d4', d: 'M5 13l4 4L19 7', wL: 14, wD: 20 },
                 ].map(({ color, stroke, d, wL, wD }, wi) => (
                   <div key={wi} className="ch-widget ch-app-widget mb-2.5 flex items-center rounded-2xl p-3 last:mb-0">
                     <div
                       className="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border"
                       style={{
-                        background:   `linear-gradient(135deg, ${color},0.18) 0%, ${color},0.05) 100%)`,
+                        background: `linear-gradient(135deg, ${color},0.18) 0%, ${color},0.05) 100%)`,
                         borderColor: `${color},0.2)`,
                       }}
                     >
@@ -399,11 +398,11 @@ export function CinematicHero({
           <h2
             className="text-[clamp(3rem,7vw,7.5rem)] font-black uppercase leading-none tracking-[-0.04em]"
             style={{
-              background: 'linear-gradient(175deg, #FFFFFF 0%, #6B7280 100%)',
+              background: 'linear-gradient(175deg, var(--color-foreground) 0%, rgba(43,37,33,0.5) 100%)',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
               backgroundClip: 'text',
-              filter: 'drop-shadow(0 12px 28px rgba(0,0,0,0.95)) drop-shadow(0 4px 8px rgba(0,0,0,0.7))',
+              filter: 'drop-shadow(0 12px 28px rgba(139,94,52,0.15)) drop-shadow(0 4px 8px rgba(139,94,52,0.1))',
             }}
           >
             {brandName}
@@ -423,7 +422,7 @@ export function CinematicHero({
         <h2 className="ch-silver-text mb-5 text-[clamp(1.8rem,5vw,4rem)] font-black leading-tight tracking-[-0.025em]">
           {ctaHeading}
         </h2>
-        <p className="mb-10 max-w-[38ch] text-base font-normal leading-relaxed text-[#a1a1aa] md:text-lg">
+        <p className="mb-10 max-w-[38ch] text-base font-normal leading-relaxed text-[var(--color-muted)] md:text-lg">
           {ctaDescription}
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">

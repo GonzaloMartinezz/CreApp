@@ -88,8 +88,8 @@ export function ProcessTimeline() {
               {/* Central Glowing Icon Node */}
               <div
                 className={cn(
-                  'absolute left-6 -translate-x-1/2 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-neutral-800 bg-background',
-                  'md:left-1/2 md:-translate-x-1/2 shadow-lg shadow-black/80'
+                  'absolute left-6 -translate-x-1/2 z-10 flex h-12 w-12 items-center justify-center rounded-full border-2 border-(--color-border) bg-(--color-background)',
+                  'md:left-1/2 md:-translate-x-1/2 shadow-lg shadow-black/10'
                 )}
               >
                 <div className={cn('flex h-8 w-8 items-center justify-center rounded-full bg-linear-to-tr text-white shadow-inner', step.color)}>
@@ -117,11 +117,11 @@ export function ProcessTimeline() {
                     Paso {step.num}
                   </span>
 
-                  <h3 className="mb-3 text-lg font-black text-white md:text-xl">
+                  <h3 className="mb-3 text-lg font-black text-(--color-foreground) md:text-xl">
                     {step.title}
                   </h3>
 
-                  <p className="text-sm font-medium leading-relaxed text-neutral-400">
+                  <p className="text-sm font-medium leading-relaxed text-black">
                     {step.desc}
                   </p>
                 </div>

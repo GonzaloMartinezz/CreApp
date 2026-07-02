@@ -112,11 +112,11 @@ export function AppCalculator() {
       `¿Cuándo podríamos coordinar una reunión de descubrimiento?`
 
     // WhatsApp link for Gonzalo
-    return `https://wa.me/5491122334455?text=${encodeURIComponent(text)}`
+    return `https://wa.me/5493816242482?text=${encodeURIComponent(text)}`
   }, [projectType, needAdmin, screens, features, costs])
 
   return (
-    <div className="mx-auto max-w-5xl rounded-3xl border border-white/5 bg-background/40 p-6 backdrop-blur-md md:p-10 shadow-2xl">
+    <div className="mx-auto max-w-5xl rounded-3xl border border-[#446471]/50 bg-linear-to-br from-[#747a75] to-[#446471] p-6 md:p-10 shadow-2xl font-bold **:font-bold">
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.3fr_1fr] lg:gap-12">
         {/* Left Column: Form Controls */}
         <div className="space-y-8">
@@ -125,17 +125,17 @@ export function AppCalculator() {
             <span className="text-[10px] font-black uppercase tracking-[0.25em] text-(--color-accent)">
               Cotizador Inteligente
             </span>
-            <h3 className="mt-2 text-2xl font-black text-white md:text-3xl">
+            <h3 className="mt-2 text-2xl font-black text-(--color-foreground) md:text-3xl">
               Configurá tu Proyecto
             </h3>
-            <p className="mt-2 text-sm text-neutral-400">
+            <p className="mt-2 text-sm text-(--color-muted)">
               Selecciona las opciones necesarias y estima el presupuesto ideal para el desarrollo de tu plataforma al instante.
             </p>
           </div>
 
           {/* 1. Project Type Selector */}
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-neutral-300">
+            <label className="text-xs font-bold uppercase tracking-widest text-(--color-foreground)">
               1. Tipo de Proyecto / Plataforma
             </label>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -152,14 +152,14 @@ export function AppCalculator() {
                     className={cn(
                       'flex flex-col items-center justify-center gap-3 rounded-2xl border p-4 text-center transition-all duration-300 cursor-pointer',
                       projectType === item.id
-                        ? 'border-(--color-accent) bg-[rgba(167,139,250,0.08)] text-white'
-                        : 'border-white/5 bg-white/2 text-neutral-400 hover:border-white/10 hover:text-white'
+                        ? 'border-(--color-accent) bg-(--color-surface-2) text-(--color-foreground) shadow-md'
+                        : 'border-(--color-border) bg-(--color-background) text-(--color-muted) hover:border-(--color-accent) hover:text-(--color-foreground)'
                     )}
                   >
                     <Icon className="h-6 w-6 stroke-[1.5]" />
                     <div>
                       <p className="text-xs font-bold">{item.label}</p>
-                      <p className="mt-0.5 text-[10px] text-neutral-500">{item.desc}</p>
+                      <p className="mt-0.5 text-[10px] opacity-70">{item.desc}</p>
                     </div>
                   </button>
                 )
@@ -169,7 +169,7 @@ export function AppCalculator() {
 
           {/* 2. Admin Panel Selector */}
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-neutral-300">
+            <label className="text-xs font-bold uppercase tracking-widest text-(--color-foreground)">
               2. ¿Necesitás Panel de Administrador?
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -183,14 +183,14 @@ export function AppCalculator() {
                   className={cn(
                     'flex flex-col items-center justify-center gap-2 rounded-2xl border p-4 text-center transition-all duration-300 cursor-pointer',
                     needAdmin === item.value
-                      ? 'border-(--color-accent) bg-[rgba(167,139,250,0.08)] text-white'
-                      : 'border-white/5 bg-white/2 text-neutral-400 hover:border-white/10 hover:text-white'
+                      ? 'border-(--color-accent) bg-(--color-surface-2) text-(--color-foreground) shadow-md'
+                      : 'border-(--color-border) bg-(--color-background) text-(--color-muted) hover:border-(--color-accent) hover:text-(--color-foreground)'
                   )}
                 >
                   <Database className="h-5 w-5 stroke-[1.5]" />
                   <div>
                     <p className="text-xs font-bold">{item.label}</p>
-                    <p className="mt-0.5 text-[10px] text-neutral-500">{item.desc}</p>
+                    <p className="mt-0.5 text-[10px] opacity-70">{item.desc}</p>
                   </div>
                 </button>
               ))}
@@ -200,33 +200,33 @@ export function AppCalculator() {
           {/* 3. Screens slider */}
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold uppercase tracking-widest text-neutral-300">
+              <label className="text-xs font-bold uppercase tracking-widest text-(--color-foreground)">
                 3. Cantidad de Secciones o Vistas
               </label>
-              <span className="rounded-md bg-white/5 px-2.5 py-1 text-xs font-bold text-(--color-accent)">
+              <span className="rounded-md bg-(--color-accent)/10 px-2.5 py-1 text-xs font-bold text-(--color-accent)">
                 {screens} {screens === 1 ? 'sección / vista' : 'secciones / vistas'}
               </span>
             </div>
-            <p className="text-[10px] text-neutral-400">
+            <p className="text-[10px] text-(--color-muted)">
               (El base incluye 3 vistas. Cada vista adicional agrega $40 USD)
             </p>
             <div className="flex items-center gap-4">
-              <span className="text-xs text-neutral-500">1</span>
+              <span className="text-xs text-(--color-muted)">1</span>
               <input
                 type="range"
                 min="1"
                 max="20"
                 value={screens}
                 onChange={(e) => setScreens(Number(e.target.value))}
-                className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-white/10 accent-(--color-accent)"
+                className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-(--color-border) accent-(--color-accent)"
               />
-              <span className="text-xs text-neutral-500">20+</span>
+              <span className="text-xs text-(--color-muted)">20+</span>
             </div>
           </div>
 
           {/* 4. Features grid */}
           <div className="space-y-3">
-            <label className="text-xs font-bold uppercase tracking-widest text-neutral-300">
+            <label className="text-xs font-bold uppercase tracking-widest text-(--color-foreground)">
               4. Módulos & Funcionalidades Extra
             </label>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -246,19 +246,19 @@ export function AppCalculator() {
                     className={cn(
                       'flex items-center gap-4 rounded-2xl border p-3.5 text-left transition-all duration-300 cursor-pointer',
                       isSelected
-                        ? 'border-(--color-accent) bg-[rgba(167,139,250,0.08)] text-white'
-                        : 'border-white/5 bg-white/2 text-neutral-400 hover:border-white/10 hover:text-white'
+                        ? 'border-(--color-accent) bg-(--color-surface-2) text-(--color-foreground) shadow-md'
+                        : 'border-(--color-border) bg-(--color-background) text-(--color-muted) hover:border-(--color-accent) hover:text-(--color-foreground)'
                     )}
                   >
                     <div className={cn(
                       'flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-all duration-300',
-                      isSelected ? 'bg-accent/20 text-(--color-accent)' : 'bg-white/5 text-neutral-500'
+                      isSelected ? 'bg-(--color-accent)/20 text-(--color-accent)' : 'bg-(--color-border)/50 text-(--color-muted)'
                     )}>
                       <Icon className="h-5 w-5 stroke-[1.5]" />
                     </div>
                     <div>
                       <p className="text-xs font-bold">{item.label}</p>
-                      <p className="mt-0.5 text-[10px] text-neutral-500">{item.desc}</p>
+                      <p className="mt-0.5 text-[10px] opacity-70">{item.desc}</p>
                     </div>
                   </button>
                 )
@@ -268,55 +268,55 @@ export function AppCalculator() {
         </div>
 
         {/* Right Column: Dynamic Price Summary Block */}
-        <div className="flex flex-col justify-between rounded-2xl bg-white/2 p-6 md:p-8 border border-white/5">
+        <div className="flex flex-col justify-between rounded-2xl bg-[#7c8f7b] p-6 md:p-8 shadow-sm">
           <div className="space-y-6">
-            <span className="rounded-full bg-green-500/10 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-green-400">
+            <span className="rounded-full bg-green-500/20 px-3 py-1 text-[10px] font-black uppercase tracking-wider text-green-900">
               ● Presupuesto en tiempo real
             </span>
 
             <div>
-              <p className="text-xs font-bold uppercase tracking-widest text-neutral-500">
+              <p className="text-xs font-bold uppercase tracking-widest text-[#090700]/70">
                 Inversión Estimada
               </p>
-              <h4 className="mt-3 text-3xl font-black text-white md:text-5xl leading-none tracking-tight">
+              <h4 className="mt-3 text-3xl font-black text-[#090700] md:text-5xl leading-none tracking-tight">
                 ${costs.minPrice.toLocaleString()}{' '}
-                <span className="text-lg md:text-2xl font-normal text-neutral-400">
+                <span className="text-lg md:text-2xl font-normal text-[#090700]/70">
                   - ${costs.maxPrice.toLocaleString()}
                 </span>
-                <span className="ml-1 text-sm font-bold text-neutral-500 uppercase tracking-widest block mt-2">
+                <span className="ml-1 text-sm font-bold text-[#090700]/70 uppercase tracking-widest block mt-2">
                   USD final
                 </span>
               </h4>
             </div>
 
-            <div className="h-px w-full bg-white/5" />
+            <div className="h-px w-full bg-[#090700]/20" />
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#090700]/70">
                   Tiempo de Entrega
                 </p>
-                <p className="mt-1 text-base font-extrabold text-white">
+                <p className="mt-1 text-base font-extrabold text-[#090700]">
                   {costs.minWeeks} a {costs.maxWeeks} semanas
                 </p>
               </div>
               <div>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-neutral-500">
+                <p className="text-[10px] font-bold uppercase tracking-widest text-[#090700]/70">
                   Metodología
                 </p>
-                <p className="mt-1 text-base font-extrabold text-white">
+                <p className="mt-1 text-base font-extrabold text-[#090700]">
                   Scrum Ágil (Gonzalo M.)
                 </p>
               </div>
             </div>
 
-            <div className="h-px w-full bg-white/5" />
+            <div className="h-px w-full bg-[#090700]/20" />
 
             <div className="space-y-2">
-              <p className="text-[10px] font-black uppercase tracking-wider text-(--color-accent)">
+              <p className="text-[10px] font-black uppercase tracking-wider text-[#090700]/90">
                 ¿Qué incluye tu presupuesto?
               </p>
-              <ul className="space-y-1.5 text-xs text-neutral-400">
+              <ul className="space-y-1.5 text-xs text-[#090700]/80">
                 <li>✓ Código fuente y repositorio en Github</li>
                 <li>✓ Estructura de vistas optimizada</li>
                 <li>✓ Configuración inicial de hosting</li>
@@ -330,7 +330,7 @@ export function AppCalculator() {
               asChild
               variant="primary"
               size="xl"
-              className="w-full justify-center text-sm font-bold shadow-[0_8px_30px_rgba(124,58,237,0.35)]"
+              className="w-full justify-center text-sm font-bold shadow-md bg-[#25D366] hover:bg-[#25D366]/90 text-white"
             >
               <a
                 href={whatsappUrl}
@@ -338,10 +338,10 @@ export function AppCalculator() {
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 cursor-pointer"
               >
-                💬 Enviar cotización a Gonzalo
+                💬 Enviar cotización por WhatsApp
               </a>
             </Button>
-            <p className="text-center text-[10px] text-neutral-500">
+            <p className="text-center text-[10px] text-[#090700]/60">
               Análisis y asesoramiento 100% gratuito sin compromiso.
             </p>
           </div>

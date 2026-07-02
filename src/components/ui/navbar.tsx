@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Menu, X, ArrowUpRight, MessageCircle, Send } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
+import { WhatsAppModal } from '@/components/ui/whatsapp-modal'
 
 export interface NavbarProps {
   brandName?: string
@@ -11,6 +12,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   // Smooth scroll handler
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -47,6 +49,13 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Global event listener to open WhatsApp modal from other components (like CinematicHero)
+  useEffect(() => {
+    const handleOpenModal = () => setIsModalOpen(true)
+    window.addEventListener('open-whatsapp-modal', handleOpenModal)
+    return () => window.removeEventListener('open-whatsapp-modal', handleOpenModal)
+  }, [])
+
   const navLinks = [
     { id: 'quienes-somos', label: 'Nosotros', num: '01' },
     { id: 'servicios', label: 'Servicios', num: '02' },
@@ -63,39 +72,47 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── HEADER NAVIGATION BAR ── */}
       <header
         className={cn(
-          'fixed left-0 right-0 top-0 z-40 transition-all duration-500 px-[4vw] py-4',
+          'fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 w-[96%] max-w-[1200px] rounded-[2rem] px-4 sm:px-6',
           isScrolled
-            ? 'bg-background/80 backdrop-blur-xl border-b border-white/5 py-3 shadow-lg shadow-black/40'
-            : 'bg-transparent py-5'
+            ? 'top-4 sm:top-6 bg-black/60 backdrop-blur-xl border border-white/10 py-3 shadow-2xl shadow-black/60'
+            : 'top-4 sm:top-8 bg-transparent py-4'
         )}
       >
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between">
-          {/* Logo */}
-          <a
-            href="#inicio"
-            onClick={(e) => handleScrollTo(e, 'inicio')}
-            className="group flex items-center gap-2.5 text-xl font-black uppercase tracking-tight text-white select-none"
+        <div className="mx-auto flex w-full items-center justify-between">
+          {/* Logo (WhatsApp Modal Trigger) */}
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="group flex items-center gap-4 select-none cursor-pointer"
+            aria-label="Abrir formulario de contacto por WhatsApp"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-linear-to-tr from-accent to-accent-3 text-xs font-black text-black shadow-[0_4px_12px_rgba(255,122,0,0.35)] transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6">
-              CA
-            </span>
-            <span className="bg-gradient-to-r from-white to-neutral-300 bg-clip-text text-transparent group-hover:text-white transition-colors duration-200">
+            {/* Logo image placeholder */}
+            <div className="flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-transparent transition-transform duration-300 group-hover:scale-105">
+              <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-full w-full object-cover" />
+            </div>
+            <span className="text-base sm:text-lg font-bold tracking-widest text-white/90 uppercase transition-colors duration-200 group-hover:text-white">
               {brandName}
             </span>
-          </a>
+          </button>
 
           {/* Center-Right Quick CTA Elements */}
-          <div className="flex items-center gap-4">
-            {/* Quick WhatsApp Link - Header */}
+          <div className="flex items-center gap-3 sm:gap-4">
+            {/* Quick Email Link - Header */}
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#22c55e]/20 bg-[#22c55e]/5 px-3.5 py-1.5 text-xs font-bold text-[#22c55e] transition-all duration-300 hover:bg-[#22c55e]/15 hover:border-[#22c55e]/45"
+              href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
+              className="hidden sm:inline-flex items-center gap-2.5 rounded-full border border-blue-400/20 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold tracking-wide text-blue-400 transition-all duration-300 hover:bg-blue-500/20 hover:border-blue-400/40"
             >
-              <MessageCircle className="h-3.5 w-3.5 fill-[#22c55e]/10 animate-pulse" />
-              <span className="hidden sm:inline">WhatsApp</span>
+              <Send className="h-4 w-4" />
+              <span>Email</span>
             </a>
+
+            {/* Quick WhatsApp Link - Header (Opens Modal) */}
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-2.5 rounded-full border border-[#25D366]/20 bg-[#25D366]/10 px-5 py-2.5 text-sm font-semibold tracking-wide text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/20 hover:border-[#25D366]/40 cursor-pointer"
+            >
+              <MessageCircle className="h-4 w-4" />
+              <span className="hidden sm:inline">WhatsApp</span>
+            </button>
 
             {/* Slide-out Menu Trigger Button */}
             <button
@@ -113,7 +130,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       <div
         onClick={() => setIsDrawerOpen(false)}
         className={cn(
-          'fixed inset-0 z-50 bg-black/60 backdrop-blur-sm transition-opacity duration-500',
+          'fixed inset-0 z-[110] bg-black/60 backdrop-blur-sm transition-opacity duration-500',
           isDrawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
       />
@@ -121,16 +138,16 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── LATERAL SIDE DRAWER PANEL (SLIDES IN FROM THE RIGHT) ── */}
       <div
         className={cn(
-          'fixed right-0 top-0 bottom-0 z-50 flex h-full w-full max-w-[390px] flex-col border-l border-white/10 bg-gradient-to-b from-[#0c0614] to-[#040108] px-8 pt-6 pb-8 shadow-2xl transition-transform duration-500 ease-out select-none',
+          'fixed right-0 top-0 bottom-0 z-[110] flex h-full w-full max-w-[390px] flex-col border-l border-white/10 bg-gradient-to-b from-[#0c0614] to-[#040108] px-8 pt-6 pb-8 shadow-2xl transition-transform duration-500 ease-out select-none',
           isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
         {/* Drawer Header */}
         <div className="flex items-center justify-between border-b border-white/5 pb-5">
-          <div className="flex items-center gap-2 text-md font-black uppercase tracking-tight text-white">
-            <span className="flex h-6 w-6 items-center justify-center rounded bg-accent text-[10px] font-black text-black">
-              CA
-            </span>
+          <div className="flex items-center gap-3 text-md font-black uppercase tracking-tight text-white">
+            <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-transparent">
+              <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-full w-full object-cover" />
+            </div>
             <span>Navegación</span>
           </div>
 
@@ -174,8 +191,30 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
           ))}
         </div>
 
-        {/* Drawer Bottom - Glowing WhatsApp Card (Section Whatsapp Direct) */}
-        <div className="mt-auto">
+        {/* Drawer Bottom - Contact Cards */}
+        <div className="mt-auto flex flex-col gap-3">
+          {/* Email Card (Blue) */}
+          <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-linear-to-b from-blue-500/8 to-blue-600/3 p-4 shadow-lg shadow-blue-500/5">
+            <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-blue-500/15 blur-xl pointer-events-none" />
+            
+            <div className="flex items-center justify-between mb-2">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-400">
+                Formal / Asesoría
+              </span>
+              <Send className="h-4 w-4 text-blue-400 opacity-80" />
+            </div>
+            
+            <h3 className="text-xs font-bold text-white mb-3">¿Prefieres un correo formal?</h3>
+            
+            <a
+              href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-blue-600 to-blue-500 py-2.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/35 active:translate-y-0 text-center"
+            >
+              📧 gonchimartinez9@gmail.com
+            </a>
+          </div>
+
+          {/* WhatsApp Card (Green) */}
           <div className="relative overflow-hidden rounded-2xl border border-[#22c55e]/20 bg-linear-to-b from-[#22c55e]/8 to-[#16a34a]/3 p-4 shadow-lg shadow-green-500/5">
             {/* Green glowing orb in background */}
             <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-[#22c55e]/15 blur-xl pointer-events-none" />
@@ -211,10 +250,8 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       </div>
 
       {/* ── FLOATING PULSING WHATSAPP BUTTON (BOTTOM-RIGHT) ── */}
-      <a
-        href={WHATSAPP_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={() => setIsModalOpen(true)}
         className="fixed bottom-6 right-6 z-35 flex h-14 w-14 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
         aria-label="Contactar por WhatsApp"
         style={{
@@ -224,7 +261,9 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       >
         <span className="absolute inset-0 rounded-full bg-[#22c55e] opacity-40 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
         <MessageCircle className="h-6 w-6 fill-white/10 transition-transform duration-300 group-hover:rotate-12" />
-      </a>
+      </button>
+      {/* ── WHATSAPP MODAL ── */}
+      <WhatsAppModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </>
   )
 }

@@ -81,14 +81,14 @@ export function ServiceCard({ title, desc, iconName, className }: ServiceCardPro
           isHovered ? 'opacity-100' : 'opacity-0'
         )}
         style={{
-          background: `radial-gradient(circle 180px at ${glowX}% ${glowY}%, rgba(167, 139, 250, 0.15), transparent 80%)`,
-          mixBlendMode: 'screen',
+          background: `radial-gradient(circle 180px at ${glowX}% ${glowY}%, rgba(139, 94, 52, 0.15), transparent 80%)`,
+          mixBlendMode: 'multiply',
         }}
       />
 
       {/* Floating vector icon */}
       <div
-        className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-(--color-accent) transition-all duration-500 group-hover:border-accent/30 group-hover:bg-[rgba(167,139,250,0.08)] group-hover:scale-110"
+        className="mb-8 flex h-14 w-14 items-center justify-center rounded-2xl border border-(--color-border) bg-(--color-surface-2) text-(--color-accent) transition-all duration-500 group-hover:border-(--color-accent) group-hover:bg-(--color-surface) group-hover:scale-110"
         style={{ transform: 'translateZ(20px)' }}
       >
         <LucideIcon className="h-7 w-7 stroke-[1.5] transition-transform duration-500 group-hover:rotate-6" />
@@ -96,10 +96,10 @@ export function ServiceCard({ title, desc, iconName, className }: ServiceCardPro
 
       {/* Content */}
       <div className="flex-1 flex flex-col justify-end" style={{ transform: 'translateZ(10px)' }}>
-        <h3 className="mb-3 text-lg font-bold text-white transition-colors duration-300 group-hover:text-(--color-accent) md:text-xl">
+        <h3 className="mb-3 text-lg font-bold text-(--color-foreground) transition-colors duration-300 group-hover:text-(--color-accent) md:text-xl">
           {title}
         </h3>
-        <p className="text-sm font-medium leading-relaxed text-neutral-400 group-hover:text-neutral-300 transition-colors duration-300">
+        <p className="text-sm font-medium leading-relaxed text-(--color-muted) group-hover:text-(--color-foreground) transition-colors duration-300">
           {desc}
         </p>
       </div>
