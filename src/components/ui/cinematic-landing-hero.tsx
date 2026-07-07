@@ -183,7 +183,7 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   onWhatsAppClick?: () => void;
 }
 
-export function CinematicLandingHero({ 
+export function CinematicLandingHero({
   brandName = "CreAPP",
   tagline1 = "Creamos tu app ideal,",
   tagline2 = "para tus clientes.",
@@ -194,10 +194,10 @@ export function CinematicLandingHero({
   ctaHeading = "Empezá tu proyecto.",
   ctaDescription = "Sin compromisos — solo buenas ideas y ejecución impecable.",
   onWhatsAppClick,
-  className, 
-  ...props 
+  className,
+  ...props
 }: CinematicHeroProps) {
-  
+
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
   const mockupRef = useRef<HTMLDivElement>(null);
@@ -212,13 +212,13 @@ export function CinematicLandingHero({
       if (window.scrollY > window.innerHeight * 2) return;
 
       cancelAnimationFrame(requestRef.current);
-      
+
       requestRef.current = requestAnimationFrame(() => {
         if (mainCardRef.current && mockupRef.current) {
           const rect = mainCardRef.current.getBoundingClientRect();
           const mouseX = e.clientX - rect.left;
           const mouseY = e.clientY - rect.top;
-          
+
           mainCardRef.current.style.setProperty("--mouse-x", `${mouseX}px`);
           mainCardRef.current.style.setProperty("--mouse-y", `${mouseY}px`);
 
@@ -240,7 +240,7 @@ export function CinematicLandingHero({
       window.removeEventListener("mousemove", handleMouseMove);
       cancelAnimationFrame(requestRef.current);
     };
-  },[]);
+  }, []);
 
   // 2. Complex Cinematic Scroll Timeline
   useEffect(() => {
@@ -285,26 +285,26 @@ export function CinematicLandingHero({
         .fromTo(".card-right-text", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
         .to({}, { duration: 2.5 })
         .set(".hero-text-wrapper", { autoAlpha: 0 })
-        .set(".cta-wrapper", { autoAlpha: 1 }) 
+        .set(".cta-wrapper", { autoAlpha: 1 })
         .to({}, { duration: 1.5 })
         .to([".mockup-scroll-wrapper", ".floating-badge", ".card-left-text", ".card-right-text"], {
           scale: 0.9, y: -40, z: -200, autoAlpha: 0, ease: "power3.in", duration: 1.2, stagger: 0.05,
         })
         // Responsive card pullback sizing
-        .to(".main-card", { 
-          width: isMobile ? "92vw" : "85vw", 
-          height: isMobile ? "92vh" : "85vh", 
-          borderRadius: isMobile ? "32px" : "40px", 
-          ease: "expo.inOut", 
-          duration: 1.8 
-        }, "pullback") 
+        .to(".main-card", {
+          width: isMobile ? "92vw" : "85vw",
+          height: isMobile ? "92vh" : "85vh",
+          borderRadius: isMobile ? "32px" : "40px",
+          ease: "expo.inOut",
+          duration: 1.8
+        }, "pullback")
         .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
         .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
 
     }, containerRef);
 
     return () => ctx.revert();
-  },[metricValue]); 
+  }, [metricValue]);
 
   return (
     <div
@@ -321,10 +321,10 @@ export function CinematicLandingHero({
 
       {/* BACKGROUND LAYER: Hero Texts */}
       <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 mt-24 md:mt-0 will-change-transform transform-style-3d">
-        <h1 className="text-track gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2 pb-4">
+        <h1 className="text-track gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2 pt-4 pb-4 leading-[1.1]">
           {tagline1}
         </h1>
-        <h1 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[2.8rem] leading-none md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pb-4">
+        <h1 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[2.8rem] md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pt-4 pb-4 leading-[1.1]">
           {tagline2}
         </h1>
       </div>
@@ -338,7 +338,7 @@ export function CinematicLandingHero({
           {ctaDescription}
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center min-h-[80px]">
-          <button 
+          <button
             onClick={onWhatsAppClick}
             className="flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 bg-[#25D366] hover:bg-[#20bd5a] text-white shadow-[0_10px_24px_-4px_rgba(37,211,102,0.5)] transition-all duration-300 hover:-translate-y-1"
           >
@@ -348,25 +348,25 @@ export function CinematicLandingHero({
               <div className="text-xl font-bold leading-none tracking-tight">WhatsApp</div>
             </div>
           </button>
-          
+
           {showDatePicker ? (
             <div className="btn-modern-dark flex flex-col sm:flex-row items-center justify-center gap-3 px-6 py-3 rounded-[1.25rem] animate-in fade-in zoom-in duration-300">
-              <input 
-                type="datetime-local" 
+              <input
+                type="datetime-local"
                 className="bg-black/50 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:border-blue-500 w-full sm:w-auto"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
               />
               <div className="flex gap-2 w-full sm:w-auto">
-                <button 
+                <button
                   onClick={() => setShowDatePicker(false)}
                   className="px-4 py-2 text-xs font-bold text-neutral-400 hover:text-white transition-colors"
                 >
                   Cancelar
                 </button>
-                <button 
+                <button
                   onClick={() => {
-                    if(!selectedDate) return;
+                    if (!selectedDate) return;
                     const dateObj = new Date(selectedDate);
                     const formattedDate = dateObj.toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' });
                     const message = `Hola Gonzalo! Me gustaría agendar una llamada de consultoría para el día ${formattedDate}.`;
@@ -380,7 +380,7 @@ export function CinematicLandingHero({
               </div>
             </div>
           ) : (
-            <button 
+            <button
               onClick={() => setShowDatePicker(true)}
               className="btn-modern-dark flex items-center justify-center gap-3 px-8 py-4 rounded-[1.25rem] group focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-background"
             >
@@ -403,8 +403,8 @@ export function CinematicLandingHero({
           <div className="card-sheen" aria-hidden="true" />
 
           {/* DYNAMIC RESPONSIVE GRID: Flex-col on mobile to force order, Grid on desktop */}
-          <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0">
-            
+          <div className="relative w-full h-full max-w-7xl mx-auto px-4 lg:px-12 flex flex-col justify-evenly lg:grid lg:grid-cols-3 items-center lg:gap-8 z-10 py-6 lg:py-0 lg:translate-y-12">
+
             {/* 1. TOP (Mobile) / RIGHT (Desktop): BRAND NAME */}
             <div className="card-right-text gsap-reveal order-1 lg:order-3 flex justify-center lg:justify-end z-20 w-full mt-16 md:mt-0 translate-x-0 lg:translate-x-24 xl:translate-x-32 opacity-40 blur-[1px] md:opacity-100 md:blur-none">
               <h2 className="text-6xl md:text-[5rem] lg:text-[5rem] xl:text-[6rem] font-black uppercase tracking-tighter text-card-silver-matte lg:mt-0 flex flex-col items-center lg:items-end">
@@ -415,20 +415,20 @@ export function CinematicLandingHero({
 
             {/* 2. MIDDLE (Mobile) / CENTER (Desktop): IPHONE MOCKUP */}
             <div className="mockup-scroll-wrapper order-2 lg:order-2 relative w-full h-[380px] lg:h-[600px] flex items-center justify-center z-10" style={{ perspective: "1000px" }}>
-              
+
               {/* Inner wrapper for safe CSS scaling that doesn't conflict with GSAP */}
               <div className="relative w-full h-full flex items-center justify-center transform scale-[0.65] md:scale-85 lg:scale-100">
-                
+
                 {/* The iPhone Bezel */}
                 <div
                   ref={mockupRef}
                   className="relative w-[280px] h-[580px] rounded-[3rem] iphone-bezel flex flex-col will-change-transform transform-style-3d"
                 >
                   {/* Physical Hardware Buttons */}
-                  <div className="absolute top-[120px] -left-[3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[160px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[220px] -left-[3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
-                  <div className="absolute top-[170px] -right-[3px] w-[3px] h-[70px] hardware-btn rounded-r-md z-0 scale-x-[-1]" aria-hidden="true" />
+                  <div className="absolute top-[120px] left-[-3px] w-[3px] h-[25px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[160px] left-[-3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[220px] left-[-3px] w-[3px] h-[45px] hardware-btn rounded-l-md z-0" aria-hidden="true" />
+                  <div className="absolute top-[170px] right-[-3px] w-[3px] h-[70px] hardware-btn rounded-r-md z-0 scale-x-[-1]" aria-hidden="true" />
 
                   {/* Inner Screen Container */}
                   <div className="absolute inset-[7px] bg-[#050914] rounded-[2.5rem] overflow-hidden shadow-[inset_0_0_15px_rgba(0,0,0,1)] text-white z-10">
@@ -456,7 +456,7 @@ export function CinematicLandingHero({
                       <div className="space-y-3 flex-1">
                         {/* 1. Chatbot IA - Purple/Blue */}
                         <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500/30 to-blue-600/20 flex items-center justify-center mr-3 border border-purple-400/30 shadow-inner">
+                          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-purple-500/30 to-blue-600/20 flex items-center justify-center mr-3 border border-purple-400/30 shadow-inner">
                             <svg className="w-5 h-5 text-purple-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                             </svg>
@@ -470,7 +470,7 @@ export function CinematicLandingHero({
 
                         {/* 2. WhatsApp Business - Green */}
                         <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-emerald-500/30 to-green-600/20 flex items-center justify-center mr-3 border border-emerald-400/30 shadow-inner">
+                          <div className="w-10 h-10 rounded-xl bg-linear-to-br from-emerald-500/30 to-green-600/20 flex items-center justify-center mr-3 border border-emerald-400/30 shadow-inner">
                             <svg className="w-5 h-5 text-emerald-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                             </svg>
@@ -485,7 +485,7 @@ export function CinematicLandingHero({
                         {/* 3. Análisis Completo - Orange */}
                         <div className="phone-widget widget-depth rounded-2xl p-3.5 border border-orange-500/20">
                           <div className="flex items-center mb-2">
-                            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/30 to-amber-600/20 flex items-center justify-center mr-3 border border-orange-400/30 shadow-inner">
+                            <div className="w-10 h-10 rounded-xl bg-linear-to-br from-orange-500/30 to-amber-600/20 flex items-center justify-center mr-3 border border-orange-400/30 shadow-inner">
                               <svg className="w-5 h-5 text-orange-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                               </svg>
@@ -502,7 +502,7 @@ export function CinematicLandingHero({
 
                         {/* 4. Lógica de Negocio */}
                         <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-indigo-500/30 to-blue-600/20 flex items-center justify-center mr-3 border border-indigo-400/30 shadow-inner">
+                          <div className="w-8 h-8 rounded-xl bg-linear-to-br from-indigo-500/30 to-blue-600/20 flex items-center justify-center mr-3 border border-indigo-400/30 shadow-inner">
                             <svg className="w-4 h-4 text-indigo-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                             </svg>
@@ -514,7 +514,7 @@ export function CinematicLandingHero({
 
                         {/* 5. Integración Digital */}
                         <div className="phone-widget widget-depth rounded-2xl p-3 flex items-center">
-                          <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-500/30 to-teal-600/20 flex items-center justify-center mr-3 border border-cyan-400/30 shadow-inner">
+                          <div className="w-8 h-8 rounded-xl bg-linear-to-br from-cyan-500/30 to-teal-600/20 flex items-center justify-center mr-3 border border-cyan-400/30 shadow-inner">
                             <svg className="w-4 h-4 text-cyan-400 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                             </svg>
@@ -533,8 +533,8 @@ export function CinematicLandingHero({
 
                 {/* Floating Badges on edges of phone */}
                 {/* Top Left: +15 Apps */}
-                <div className="floating-badge absolute flex top-[40px] left-[-60px] lg:left-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30">
-                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-gradient-to-b from-orange-500/20 to-orange-900/10 flex items-center justify-center border border-orange-400/30 shadow-inner">
+                <div className="floating-badge absolute flex top-[90px] left-[-60px] lg:left-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30">
+                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-linear-to-b from-orange-500/20 to-orange-900/10 flex items-center justify-center border border-orange-400/30 shadow-inner">
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">🚀</span>
                   </div>
                   <div>
@@ -544,8 +544,8 @@ export function CinematicLandingHero({
                 </div>
 
                 {/* Top Right: Proceso Personalizado */}
-                <div className="floating-badge absolute flex top-[70px] right-[-60px] lg:right-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30" style={{ animationDelay: '0.5s' }}>
-                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-gradient-to-b from-emerald-500/20 to-emerald-900/10 flex items-center justify-center border border-emerald-400/30 shadow-inner">
+                <div className="floating-badge absolute flex top-[120px] right-[-60px] lg:right-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30" style={{ animationDelay: '0.5s' }}>
+                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-linear-to-b from-emerald-500/20 to-emerald-900/10 flex items-center justify-center border border-emerald-400/30 shadow-inner">
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">🎯</span>
                   </div>
                   <div>
@@ -556,7 +556,7 @@ export function CinematicLandingHero({
 
                 {/* Bottom Right: 100% Satisfacción */}
                 <div className="floating-badge absolute flex bottom-[60px] right-[-50px] lg:right-[-70px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30" style={{ animationDelay: '1s' }}>
-                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-gradient-to-b from-indigo-500/20 to-indigo-900/10 flex items-center justify-center border border-indigo-400/30 shadow-inner">
+                  <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-linear-to-b from-indigo-500/20 to-indigo-900/10 flex items-center justify-center border border-indigo-400/30 shadow-inner">
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">⭐</span>
                   </div>
                   <div>

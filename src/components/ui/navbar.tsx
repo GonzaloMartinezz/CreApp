@@ -3,12 +3,14 @@ import { Menu, X, ArrowUpRight, MessageCircle, Send } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { WhatsAppModal } from '@/components/ui/whatsapp-modal'
+import { useLanguage } from '@/context/LanguageContext'
 
 export interface NavbarProps {
   brandName?: string
 }
 
 export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
+  const { t, language, setLanguage } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
@@ -57,12 +59,12 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
   }, [])
 
   const navLinks = [
-    { id: 'quienes-somos', label: 'Nosotros', num: '01' },
-    { id: 'servicios', label: 'Servicios', num: '02' },
-    { id: 'proceso', label: 'Metodología', num: '03' },
-    { id: 'portfolio', label: 'Casos de Éxito', num: '04' },
-    { id: 'cotizador', label: 'Cotizador', num: '05' },
-    { id: 'contacto', label: 'Contacto', num: '06' },
+    { id: 'quienes-somos', label: t('nav.about'), num: '01' },
+    { id: 'servicios', label: t('nav.services'), num: '02' },
+    { id: 'proceso', label: t('nav.process'), num: '03' },
+    { id: 'portfolio', label: t('nav.portfolio'), num: '04' },
+    { id: 'cotizador', label: t('nav.calculator'), num: '05' },
+    { id: 'contacto', label: t('nav.contact'), num: '06' },
   ]
 
   const WHATSAPP_URL = "https://wa.me/5493816242482?text=Hola%20Gonzalo!%20Vi%20tu%20porfolio%20de%20CreAPP%20y%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto%20contigo."
@@ -72,7 +74,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── HEADER NAVIGATION BAR ── */}
       <header
         className={cn(
-          'fixed left-1/2 -translate-x-1/2 z-[100] transition-all duration-500 w-[96%] max-w-[1200px] rounded-[2rem] px-4 sm:px-6',
+          'fixed left-1/2 -translate-x-1/2 z-100 transition-all duration-500 w-[96%] max-w-[1200px] rounded-4xl px-4 sm:px-6',
           isScrolled
             ? 'top-4 sm:top-6 bg-black/60 backdrop-blur-xl border border-white/10 py-3 shadow-2xl shadow-black/60'
             : 'top-4 sm:top-8 bg-transparent py-4'
@@ -95,32 +97,41 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
           </button>
 
           {/* Center-Right Quick CTA Elements */}
-          <div className="flex items-center gap-3 sm:gap-4">
+          <div className="flex items-center gap-1.5 sm:gap-4">
+            {/* Language Toggle */}
+            <button
+              onClick={() => setLanguage(language === 'es' ? 'en' : 'es')}
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 text-[10px] sm:text-xs font-bold text-white backdrop-blur-sm transition-all duration-300 hover:border-white/30 hover:bg-white/10 cursor-pointer"
+              aria-label="Cambiar idioma"
+            >
+              {language.toUpperCase()}
+            </button>
+
             {/* Quick Email Link - Header */}
             <a
               href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
-              className="hidden sm:inline-flex items-center gap-2.5 rounded-full border border-blue-400/20 bg-blue-500/10 px-5 py-2.5 text-sm font-semibold tracking-wide text-blue-400 transition-all duration-300 hover:bg-blue-500/20 hover:border-blue-400/40"
+              className="hidden sm:inline-flex items-center gap-1 sm:gap-2.5 rounded-full border border-blue-400/20 bg-blue-500/10 px-2 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-semibold tracking-wide text-blue-400 transition-all duration-300 hover:bg-blue-500/20 hover:border-blue-400/40"
             >
-              <Send className="h-4 w-4" />
-              <span>Email</span>
+              <Send className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="hidden min-[375px]:inline">{t('nav.emailBtn')}</span>
             </a>
 
             {/* Quick WhatsApp Link - Header (Opens Modal) */}
             <button
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-2.5 rounded-full border border-[#25D366]/20 bg-[#25D366]/10 px-5 py-2.5 text-sm font-semibold tracking-wide text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/20 hover:border-[#25D366]/40 cursor-pointer"
+              className="hidden sm:inline-flex items-center gap-1 sm:gap-2.5 rounded-full border border-[#25D366]/20 bg-[#25D366]/10 px-2 py-2 sm:px-5 sm:py-2.5 text-[10px] sm:text-sm font-semibold tracking-wide text-[#25D366] transition-all duration-300 hover:bg-[#25D366]/20 hover:border-[#25D366]/40 cursor-pointer"
             >
-              <MessageCircle className="h-4 w-4" />
-              <span className="hidden sm:inline">WhatsApp</span>
+              <MessageCircle className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
+              <span className="hidden min-[375px]:inline">{t('nav.whatsappBtn')}</span>
             </button>
 
             {/* Slide-out Menu Trigger Button */}
             <button
               onClick={() => setIsDrawerOpen(true)}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white backdrop-blur-sm transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent cursor-pointer group"
+              className="flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-full border border-white/10 bg-white/4 text-white backdrop-blur-sm transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:text-accent cursor-pointer group"
               aria-label="Abrir menú"
             >
-              <Menu className="h-5 w-5 transition-transform duration-300 group-hover:scale-105" />
+              <Menu className="h-4 w-4 sm:h-5 sm:w-5 transition-transform duration-300 group-hover:scale-105" />
             </button>
           </div>
         </div>
@@ -130,7 +141,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       <div
         onClick={() => setIsDrawerOpen(false)}
         className={cn(
-          'fixed inset-0 z-[110] bg-black/60 backdrop-blur-sm transition-opacity duration-500',
+          'fixed inset-0 z-110 bg-black/60 backdrop-blur-sm transition-opacity duration-500',
           isDrawerOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         )}
       />
@@ -138,7 +149,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── LATERAL SIDE DRAWER PANEL (SLIDES IN FROM THE RIGHT) ── */}
       <div
         className={cn(
-          'fixed right-0 top-0 bottom-0 z-[110] flex h-full w-full max-w-[390px] flex-col border-l border-white/10 bg-gradient-to-b from-[#0c0614] to-[#040108] px-8 pt-6 pb-8 shadow-2xl transition-transform duration-500 ease-out select-none',
+          'fixed right-0 top-0 bottom-0 z-110 flex h-full w-full max-w-[390px] flex-col border-l border-white/10 bg-linear-to-b from-[#0c0614] to-[#040108] px-8 pt-6 pb-8 shadow-2xl transition-transform duration-500 ease-out select-none',
           isDrawerOpen ? 'translate-x-0' : 'translate-x-full'
         )}
       >
@@ -148,7 +159,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
             <div className="flex h-10 w-10 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-transparent">
               <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-full w-full object-cover" />
             </div>
-            <span>Navegación</span>
+            <span>{t('footer.nav.title')}</span>
           </div>
 
           <button
@@ -160,8 +171,8 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
           </button>
         </div>
 
-        {/* Scrollable Content Area */}
-        <div className="flex-1 overflow-y-auto flex flex-col pt-6 pb-2 -mr-2 pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-white/10 hover:scrollbar-thumb-white/20">
+        {/* Fixed Content Area */}
+        <div className="flex-1 overflow-hidden flex flex-col pt-6 pb-2">
           {/* Vertical Links List */}
           <div className="flex flex-col gap-1.5">
             {navLinks.map((link) => (
@@ -170,10 +181,10 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
                 href={`#${link.id}`}
                 onClick={(e) => handleScrollTo(e, link.id)}
                 className={cn(
-                  'group flex items-center justify-between rounded-xl px-4 py-3 text-lg font-bold tracking-wide uppercase transition-all duration-300',
+                  'group flex items-center justify-between rounded-xl px-4 py-3.5 text-base font-black tracking-wide uppercase transition-all duration-300',
                   activeSection === link.id
-                    ? 'bg-accent/10 border border-accent/20 text-accent'
-                    : 'text-neutral-400 border border-transparent hover:text-white hover:bg-white/5 hover:pl-5'
+                    ? 'text-white bg-white/10'
+                    : 'text-neutral-500 hover:text-white hover:bg-white/5 hover:pl-6'
                 )}
               >
                 <div className="flex items-center gap-3">
@@ -194,59 +205,33 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
           </div>
 
           {/* Drawer Bottom - Contact Cards */}
-          <div className="mt-8 flex flex-col gap-3 pb-4">
-            {/* Email Card (Blue) */}
-            <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-linear-to-b from-blue-500/8 to-blue-600/3 p-4 shadow-lg shadow-blue-500/5 shrink-0">
-              <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-blue-500/15 blur-xl pointer-events-none" />
-              
-              <div className="flex items-center justify-between mb-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-blue-400">
-                  Formal / Asesoría
-                </span>
-                <Send className="h-4 w-4 text-blue-400 opacity-80" />
-              </div>
-              
-              <h3 className="text-xs font-bold text-white mb-3">¿Prefieres un correo formal?</h3>
-              
+          <div className="mt-auto flex flex-col gap-3 pb-6 pt-4 border-t border-white/5">
+            <span className="text-[10px] font-bold text-neutral-500 uppercase tracking-widest px-2 mb-1">
+              Contacto Directo
+            </span>
+            <div className="grid grid-cols-2 gap-3 px-2">
               <a
                 href="mailto:gonchimartinez9@gmail.com?subject=Quiero%20crear%20una%20app"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-blue-600 to-blue-500 py-2.5 text-[10px] font-bold uppercase tracking-wider text-white shadow-md shadow-blue-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-blue-500/35 active:translate-y-0 text-center"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl border border-blue-500/20 bg-blue-500/5 hover:bg-blue-500/10 p-4 transition-all hover:-translate-y-1"
               >
-                📧 gonchimartinez9@gmail.com
+                <Send className="h-5 w-5 text-blue-400" />
+                <span className="text-[10px] font-bold text-blue-400 uppercase tracking-wider">Email</span>
               </a>
-            </div>
-
-            {/* WhatsApp Card (Green) */}
-            <div className="relative overflow-hidden rounded-2xl border border-[#22c55e]/20 bg-linear-to-b from-[#22c55e]/8 to-[#16a34a]/3 p-4 shadow-lg shadow-green-500/5 shrink-0">
-              {/* Green glowing orb in background */}
-              <div className="absolute right-0 top-0 -mr-6 -mt-6 h-20 w-20 rounded-full bg-[#22c55e]/15 blur-xl pointer-events-none" />
-
-              <div className="flex items-center justify-between mb-3">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#22c55e]/10 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#22c55e]">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#22c55e]" />
-                  Online / Disponible
-                </span>
-                <MessageCircle className="h-5 w-5 text-[#22c55e] opacity-80" />
-              </div>
-
-              <h3 className="text-sm font-bold text-white mb-1">¿Tienes una idea en mente?</h3>
-              <p className="text-[11px] text-neutral-400 leading-relaxed mb-4">
-                Hablemos directamente por WhatsApp. Te asesoro en la arquitectura, plazos y costos de tu proyecto sin compromiso.
-              </p>
 
               <a
                 href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-[#22c55e] to-[#16a34a] py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-md shadow-green-500/20 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-green-500/35 active:translate-y-0 text-center"
+                className="flex flex-col items-center justify-center gap-2 rounded-xl border border-success/20 bg-success/5 hover:bg-success/10 p-4 transition-all hover:-translate-y-1"
               >
-                💬 Chat: 381 624 2482
+                <MessageCircle className="h-5 w-5 text-success" />
+                <span className="text-[10px] font-bold text-success uppercase tracking-wider">WhatsApp</span>
               </a>
             </div>
-
-            <div className="mt-4 flex justify-between text-[10px] text-neutral-500 px-1 shrink-0">
-              <span>Tasa de respuesta: ~15m</span>
-              <span>Estudio Gonzalo M.</span>
+            
+            <div className="mt-2 flex justify-between text-[10px] text-neutral-600 px-3 shrink-0 font-medium">
+              <span>{t('nav.drawer.responseRate')}</span>
+              <span>{t('nav.drawer.studio')}</span>
             </div>
           </div>
         </div>
@@ -255,14 +240,14 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
       {/* ── FLOATING PULSING WHATSAPP BUTTON (BOTTOM-RIGHT) ── */}
       <button
         onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-6 right-6 z-[90] flex h-14 w-14 items-center justify-center rounded-full bg-[#22c55e] text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
+        className="fixed bottom-6 right-6 z-90 flex h-14 w-14 items-center justify-center rounded-full bg-success text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
         aria-label="Contactar por WhatsApp"
         style={{
           boxShadow: '0 8px 32px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255,255,255,0.25)',
           animationDuration: '3s'
         }}
       >
-        <span className="absolute inset-0 rounded-full bg-[#22c55e] opacity-40 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
+        <span className="absolute inset-0 rounded-full bg-success opacity-40 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
         <MessageCircle className="h-6 w-6 fill-white/10 transition-transform duration-300 group-hover:rotate-12" />
       </button>
       {/* ── WHATSAPP MODAL ── */}

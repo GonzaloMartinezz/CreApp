@@ -149,7 +149,7 @@ export default function App() {
 
             <D />
 
-            <p className="ml-auto max-w-[48ch] text-right text-[clamp(0.95rem,1.8vw,1.3rem)] font-medium leading-relaxed text-[var(--color-muted)]">
+            <p className="ml-auto max-w-[48ch] text-right text-[clamp(0.95rem,1.8vw,1.3rem)] font-medium leading-relaxed text-(--color-muted)">
               {t('services.description')}
             </p>
           </div>
@@ -162,7 +162,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Proceso"
-          className="relative z-30 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
+          className="relative z-30 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-foreground)' }}
         >
 
@@ -172,7 +172,7 @@ export default function App() {
               <D className="mt-4 opacity-15" />
             </div>
 
-            <h2 className="text-[clamp(3.1rem,9vw,10rem)] font-black uppercase leading-[0.85] tracking-tight text-left text-[var(--color-foreground)]">
+            <h2 className="text-[clamp(3.1rem,9vw,10rem)] font-black uppercase leading-[0.85] tracking-tight text-left text-(--color-foreground)">
               Paso A Paso.<br />Metodología Ágil.
             </h2>
 
@@ -198,13 +198,13 @@ export default function App() {
         id="portfolio"
         aria-label="Portafolio"
         style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
-        className="relative z-40 w-full overflow-x-hidden px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
+        className="relative z-40 w-full overflow-x-hidden px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
       >
 
         <div className="mb-8 flex flex-col gap-4">
           <Label>{t('portfolio.label')}</Label>
           <D />
-          <h2 className="text-[clamp(3rem,9vw,10rem)] font-black uppercase leading-[0.85] tracking-tight text-[var(--color-foreground)]">
+          <h2 className="text-[clamp(3rem,9vw,10rem)] font-black uppercase leading-[0.85] tracking-tight text-(--color-foreground)">
             {t('portfolio.title')}
           </h2>
           <D />
@@ -227,8 +227,8 @@ export default function App() {
         variants={fadeInUp}
         id="cotizador"
         aria-label="Calculadora de presupuesto"
-        style={{ backgroundColor: '#1a1a1a', color: 'var(--color-foreground)' }}
-        className="relative z-50 w-full px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
+        style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-foreground)' }}
+        className="relative z-50 w-full px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
       >
         {/* Visual cosmic background orbs */}
 
@@ -256,7 +256,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Resultados"
-          className="relative z-[60] flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-[var(--color-border)]"
+          className="relative z-60 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ background: 'var(--color-surface-2)', color: 'var(--color-foreground)' }}
         >
 
@@ -302,7 +302,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Preguntas Frecuentes"
-          className="relative z-[70] flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
+          className="relative z-70 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
 
@@ -336,7 +336,7 @@ export default function App() {
           variants={fadeInUp}
           aria-label="Llamada a la acción y contacto"
           className="relative z-80 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 overflow-hidden border-t border-(--color-border)"
-          style={{ backgroundColor: '#000000', color: 'var(--color-foreground)' }}
+          style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
           {/* Background Paths effect */}
           <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
@@ -397,7 +397,7 @@ export default function App() {
          ══════════════════════════════════════════════════════════════ */}
       <footer className="relative z-90 flex flex-col gap-4 bg-(--color-surface-2) border-t border-(--color-border) px-[4vw] py-12 text-sm text-(--color-muted)">
         <div className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-12 lg:flex-row lg:justify-between">
-          
+
           {/* Column 1: Logo (Standalone, large, centered vertically) */}
           <div className="flex shrink-0 items-center justify-center lg:justify-start">
             <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-28 w-28 md:h-36 md:w-36 rounded-full object-cover bg-white shadow-2xl" />
@@ -421,7 +421,7 @@ export default function App() {
 
           {/* Column 3: Social Icons Vertical */}
           <div className="flex shrink-0 items-center justify-center">
-            <SocialIcons vertical={false} className="md:!flex-col" />
+            <SocialIcons vertical={false} className="md:flex-col!" />
           </div>
 
           {/* Column 4: Navigation Links (Side-by-side on desktop, stacked on mobile) */}

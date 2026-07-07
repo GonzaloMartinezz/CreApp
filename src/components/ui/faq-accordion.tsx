@@ -59,13 +59,13 @@ export function FAQAccordion() {
             <div
               key={idx}
               className={cn(
-                'rounded-[2rem] overflow-hidden border bg-[#050505] transition-all duration-300 relative group',
+                'rounded-4xl overflow-hidden border bg-[#050505] transition-all duration-300 relative group',
                 isOpen ? 'border-[#b7bd7f]/30 shadow-[0_0_30px_rgba(183,189,127,0.05)]' : 'border-white/5 hover:border-white/10 hover:bg-[#0a0a0a]'
               )}
             >
               {/* Subtle hover gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              
+              <div className="absolute inset-0 bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
               <button
                 onClick={() => toggleFAQ(idx)}
                 className="relative z-10 flex w-full items-center justify-between p-6 md:p-8 text-left"
@@ -73,7 +73,7 @@ export function FAQAccordion() {
               >
                 <div className="flex items-center gap-4 md:gap-6 pr-4">
                   <div className={cn(
-                    "flex-shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-300",
+                    "shrink-0 w-12 h-12 rounded-full border flex items-center justify-center transition-colors duration-300",
                     isOpen ? "bg-[#b7bd7f]/10 border-[#b7bd7f]/30 text-[#b7bd7f]" : "bg-white/5 border-white/10 text-neutral-400 group-hover:text-white"
                   )}>
                     {faq.icon}
@@ -102,11 +102,11 @@ export function FAQAccordion() {
                     transition={{ duration: 0.3, ease: 'easeInOut' }}
                   >
                     <div className="relative z-10 px-6 pb-8 pt-2 md:px-8 md:pb-10 md:pt-2">
-                       <div className="pl-0 md:pl-[4.5rem]">
-                         <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-medium">
-                           {faq.a}
-                         </p>
-                       </div>
+                      <div className="pl-0 md:pl-18">
+                        <p className="text-sm md:text-base leading-relaxed text-neutral-400 font-medium">
+                          {faq.a}
+                        </p>
+                      </div>
                     </div>
                   </motion.div>
                 )}

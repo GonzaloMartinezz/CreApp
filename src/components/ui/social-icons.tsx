@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react"
-import { Mail, MessageCircle } from "lucide-react"
+import { Mail, MessageCircle, Instagram } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const socials = [
   {
@@ -26,6 +27,11 @@ const socials = [
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
       </svg>
     ),
+  },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/gonchi_martinezz/",
+    icon: <Instagram className="size-[18px]" />,
   },
   {
     name: "WhatsApp",
@@ -70,14 +76,24 @@ export function SocialIcons({ vertical = false, className = '' }: { vertical?: b
           />
 
           <span
-            className={`absolute ${vertical ? 'left-12 top-1/2 -translate-y-1/2 px-2 py-1' : '-top-10 left-1/2 -translate-x-1/2 px-2.5 py-1'} rounded-lg bg-white text-neutral-950 text-[11px] font-medium whitespace-nowrap transition-all duration-300 ease-out ${hoveredIndex === index ? "opacity-100" : "opacity-0 pointer-events-none"
-              } ${!vertical && hoveredIndex === index ? "translate-y-0" : ""} ${!vertical && hoveredIndex !== index ? "translate-y-1" : ""}`}
+            className={cn(
+              "absolute rounded-lg bg-white text-neutral-950 text-[11px] font-medium whitespace-nowrap transition-all duration-300 ease-out",
+              hoveredIndex === index ? "opacity-100" : "opacity-0 pointer-events-none",
+              vertical
+                ? "left-12 top-1/2 -translate-y-1/2 px-2 py-1 translate-x-0"
+                : "md:left-12 md:top-1/2 md:-translate-y-1/2 md:px-2 md:py-1 md:translate-x-0 -top-10 left-1/2 -translate-x-1/2 px-2.5 py-1",
+              !vertical && hoveredIndex === index ? "max-md:translate-y-0" : "",
+              !vertical && hoveredIndex !== index ? "max-md:translate-y-1" : ""
+            )}
           >
             {social.name}
             {vertical ? (
               <span className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 size-2 rotate-45 bg-white" />
             ) : (
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 rotate-45 bg-white" />
+              <>
+                <span className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 size-2 rotate-45 bg-white hidden md:block" />
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 size-2 rotate-45 bg-white md:hidden" />
+              </>
             )}
           </span>
         </a>

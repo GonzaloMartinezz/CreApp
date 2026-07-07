@@ -6,22 +6,22 @@
 @theme inline {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 
-  /* Dark Theme Palette (Moss Green Theme) */
-  --color-background:     #000e06;
+  /* Premium Dark Theme Palette (Sleek Zinc/Emerald) */
+  --color-background:     #000000;
   --color-foreground:     #ffffff;
-  --color-surface:        #152710;
-  --color-surface-2:      #465243;
-  --color-border:         #465243;
-  --color-muted:          #74865f;
+  --color-surface:        #09090b;
+  --color-surface-2:      #121214;
+  --color-border:         #27272a;
+  --color-muted:          #a1a1aa;
   
   /* Primary & Accent Color Palette */
-  --color-accent:         #b7bd7f;
-  --color-accent-2:       #74865f;
-  --color-accent-3:       #465243;
+  --color-accent:         #10b981;
+  --color-accent-2:       #059669;
+  --color-accent-3:       #047857;
   --color-success:        #22c55e;
-  --color-primary:        #b7bd7f;
-  --color-primary-2:      #74865f;
-  --color-primary-3:      #465243;
+  --color-primary:        #10b981;
+  --color-primary-2:      #34d399;
+  --color-primary-3:      #059669;
   
   --animate-orb-float-1: orb-float-1 25s infinite alternate ease-in-out;
   --animate-orb-float-2: orb-float-2 30s infinite alternate ease-in-out;

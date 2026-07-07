@@ -17,28 +17,28 @@ const DEFAULT_STEPS: ProcessStep[] = [
     title: 'Descubrimiento & Estrategia',
     desc: 'Analizamos a fondo tu modelo de negocio, definimos las metas operativas e investigamos detalladamente la experiencia ideal para tus usuarios.',
     iconName: 'Search',
-    color: 'from-[#4a2c11] to-[#78350f]',
+    color: 'from-neutral-800 to-neutral-700',
   },
   {
     num: '02',
     title: 'Diseño UX/UI & Prototipado',
     desc: 'Creamos interfaces modernas de alta fidelidad. Diseñamos prototipos totalmente interactivos y navegables antes de comenzar a escribir código.',
     iconName: 'PenTool',
-    color: 'from-[#78350f] to-[#b45309]',
+    color: 'from-neutral-700 to-emerald-900',
   },
   {
     num: '03',
     title: 'Desarrollo de Software ágil',
     desc: 'Programamos tu app con código escalable, limpio y testeado. Realizamos entregas continuas semanales en un servidor de pruebas dedicado.',
     iconName: 'Code2',
-    color: 'from-[#b45309] to-[#d97706]',
+    color: 'from-emerald-900 to-emerald-600',
   },
   {
     num: '04',
     title: 'Lanzamiento & Escalabilidad',
     desc: 'Publicamos tu app en las tiendas de Apple y Google o en servidores Cloud optimizados, y te brindamos soporte de infraestructura post-lanzamiento.',
     iconName: 'Rocket',
-    color: 'from-[#d97706] to-[#f59e0b]',
+    color: 'from-emerald-600 to-emerald-400',
   },
 ]
 
@@ -68,7 +68,7 @@ export function ProcessTimeline() {
         {/* Scroll-Linked Fill Line */}
         <motion.div
           style={{ scaleY, originY: 0 }}
-          className="absolute inset-x-0 top-0 bottom-0 bg-linear-to-b from-[#4a2c11] via-[#b45309] to-[#f59e0b] shadow-[0_0_12px_rgba(180,83,9,0.35)]"
+          className="absolute inset-x-0 top-0 bottom-0 bg-linear-to-b from-neutral-800 via-emerald-600 to-emerald-400 shadow-[0_0_12px_rgba(16,185,129,0.35)]"
         />
       </div>
 
@@ -108,20 +108,20 @@ export function ProcessTimeline() {
                   isEven ? 'md:text-right md:pr-0' : 'md:text-left md:pl-0'
                 )}
               >
-                <div className="glass-card glass-card-hover rounded-3xl p-6 md:p-8">
+                <div className="bg-[#0a0a0a] border border-white/5 hover:border-white/10 hover:bg-neutral-900 transition-all rounded-3xl p-6 md:p-8">
                   {/* Step Number Badge */}
                   <span className={cn(
-                    'inline-block mb-3 rounded-full bg-linear-to-r px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white',
+                    'inline-block mb-4 rounded-full bg-linear-to-r px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white',
                     step.color
                   )}>
                     Paso {step.num}
                   </span>
 
-                  <h3 className="mb-3 text-lg font-black text-(--color-foreground) md:text-xl">
+                  <h3 className="mb-3 text-lg font-black text-white md:text-xl">
                     {step.title}
                   </h3>
 
-                  <p className="text-sm font-medium leading-relaxed text-black">
+                  <p className="text-sm font-medium leading-relaxed text-neutral-400">
                     {step.desc}
                   </p>
                 </div>
