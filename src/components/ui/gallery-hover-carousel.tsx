@@ -8,6 +8,7 @@ import {
   CarouselItem,
   type CarouselApi,
 } from '@/components/ui/carousel'
+import { useLanguage } from '@/context/LanguageContext'
 
 /* ─── Types ─────────────────────────────────────────────────────────────── */
 
@@ -75,6 +76,7 @@ export function GalleryHoverCarousel({
   const [api, setApi] = useState<CarouselApi>()
   const [canScrollPrev, setCanScrollPrev] = useState(false)
   const [canScrollNext, setCanScrollNext] = useState(false)
+  const { t } = useLanguage()
 
   const onSelect = useCallback((api: CarouselApi) => {
     if (!api) return
@@ -97,10 +99,10 @@ export function GalleryHoverCarousel({
         {/* Header */}
         <div className="mb-10 flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div className="max-w-xl">
-            <h3 className="text-2xl font-bold leading-snug tracking-tight text-[var(--color-foreground)] md:text-3xl">
+            <h3 className="text-2xl font-bold leading-snug tracking-tight text-(--color-foreground) md:text-3xl">
               {heading}{' '}
-              <span className="font-normal text-[var(--color-muted)] text-lg md:text-xl">
-                — Explorá nuestra colección de soluciones innovadoras.
+              <span className="font-normal text-(--color-muted) text-lg md:text-xl">
+                {t('portfolio.carousel.subheading')}
               </span>
             </h3>
           </div>
@@ -108,10 +110,10 @@ export function GalleryHoverCarousel({
             <button
               onClick={() => api?.scrollPrev()}
               disabled={!canScrollPrev}
-              aria-label="Anterior"
+              aria-label={t('portfolio.carousel.prev')}
               className={cn(
-                'flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] transition-all duration-200',
-                'hover:border-[var(--color-accent)] hover:bg-[rgba(167,139,250,0.08)] hover:text-[var(--color-accent)]',
+                'flex h-10 w-10 items-center justify-center rounded-full border border-(--color-border) transition-all duration-200',
+                'hover:border-(--color-accent) hover:bg-[rgba(167,139,250,0.08)] hover:text-(--color-accent)',
                 'disabled:cursor-not-allowed disabled:opacity-30',
               )}
             >
@@ -120,10 +122,10 @@ export function GalleryHoverCarousel({
             <button
               onClick={() => api?.scrollNext()}
               disabled={!canScrollNext}
-              aria-label="Siguiente"
+              aria-label={t('portfolio.carousel.next')}
               className={cn(
-                'flex h-10 w-10 items-center justify-center rounded-full border border-[var(--color-border)] transition-all duration-200',
-                'hover:border-[var(--color-accent)] hover:bg-[rgba(167,139,250,0.08)] hover:text-[var(--color-accent)]',
+                'flex h-10 w-10 items-center justify-center rounded-full border border-(--color-border) transition-all duration-200',
+                'hover:border-(--color-accent) hover:bg-[rgba(167,139,250,0.08)] hover:text-(--color-accent)',
                 'disabled:cursor-not-allowed disabled:opacity-30',
               )}
             >
@@ -148,36 +150,37 @@ export function GalleryHoverCarousel({
                   href={item.url}
                   className="group relative block h-[320px] md:h-[380px]"
                 >
-                  <Card className="relative h-full w-full overflow-hidden rounded-3xl border-[var(--color-border)]">
+                  <Card className="relative h-full w-full overflow-hidden rounded-3xl border-(--color-border)">
 
                     {/* Image — full height, shrinks on hover */}
                     <div className="relative h-full w-full overflow-hidden transition-all duration-500 group-hover:h-1/2">
                       <img
                         src={item.image}
-                        alt={item.title}
-                        className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                        alt={t(item.title as any)}
                         loading="lazy"
+                        decoding="async"
+                        className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                       />
                       {/* fade at bottom on hover */}
-                      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                      <div className="absolute inset-x-0 bottom-0 h-20 bg-linear-to-t from-black/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                     </div>
 
                     {/* Text panel — slides up on hover */}
-                    <div className="absolute inset-x-0 bottom-0 flex h-0 flex-col justify-center overflow-hidden bg-[var(--color-surface)]/95 px-5 backdrop-blur-sm transition-all duration-500 group-hover:h-1/2 group-hover:py-4">
-                      <h3 className="mb-1.5 text-base font-bold leading-tight text-[var(--color-foreground)] md:text-lg">
-                        {item.title}
+                    <div className="absolute inset-x-0 bottom-0 flex h-0 flex-col justify-center overflow-hidden bg-surface/95 px-5 backdrop-blur-sm transition-all duration-500 group-hover:h-1/2 group-hover:py-4">
+                      <h3 className="mb-1.5 text-base font-bold leading-tight text-(--color-foreground) md:text-lg">
+                        {t(item.title as any)}
                       </h3>
-                      <p className="line-clamp-2 text-sm leading-relaxed text-[var(--color-muted)]">
-                        {item.summary}
+                      <p className="line-clamp-2 text-sm leading-relaxed text-(--color-muted)">
+                        {t(item.summary as any)}
                       </p>
                       {/* Arrow CTA */}
                       <button
                         className={cn(
                           'absolute bottom-3 right-3 flex h-8 w-8 items-center justify-center rounded-full',
-                          'border border-[var(--color-border)] text-[var(--color-accent)]',
+                          'border border-(--color-border) text-(--color-accent)',
                           'transition-transform duration-300 group-hover:-rotate-45',
                         )}
-                        aria-label={`Ver proyecto ${item.title}`}
+                        aria-label={`${t('portfolio.carousel.view')} ${t(item.title as any)}`}
                         tabIndex={-1}
                       >
                         <ArrowRight size={14} />

@@ -1,7 +1,9 @@
 import React from "react";
 import { Fingerprint, ArrowDown, Shield, Users } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 
 export function BentoGridFeatures() {
+  const { t } = useLanguage();
   return (
     <div className="w-full max-w-6xl mx-auto mt-16 px-4 pb-20 relative z-20">
       <div className="grid grid-cols-1 md:grid-cols-6 gap-4 lg:gap-6">
@@ -17,7 +19,7 @@ export function BentoGridFeatures() {
                 <ellipse cx="100" cy="50" rx="90" ry="40" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" className="animate-[spin_20s_linear_infinite]" />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-white tracking-tight">Personalizable</h3>
+            <h3 className="text-xl font-bold text-white tracking-tight">{t('bento.custom.title')}</h3>
           </div>
         </div>
 
@@ -28,9 +30,9 @@ export function BentoGridFeatures() {
             <div className="w-16 h-16 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
               <Fingerprint className="w-8 h-8 text-neutral-300" />
             </div>
-            <h3 className="text-lg font-bold text-white tracking-tight mb-3">Seguridad por defecto</h3>
+            <h3 className="text-lg font-bold text-white tracking-tight mb-3">{t('bento.security.title')}</h3>
             <p className="text-sm text-neutral-500 font-medium leading-relaxed max-w-[250px] mx-auto">
-              Implementamos los estándares de seguridad más estrictos para proteger la información de tu negocio.
+              {t('bento.security.desc')}
             </p>
           </div>
         </div>
@@ -51,9 +53,9 @@ export function BentoGridFeatures() {
               </svg>
             </div>
             <div className="text-center mt-6">
-              <h3 className="text-lg font-bold text-white tracking-tight mb-3">Rendimiento Superior</h3>
+              <h3 className="text-lg font-bold text-white tracking-tight mb-3">{t('bento.performance.title')}</h3>
               <p className="text-sm text-neutral-500 font-medium leading-relaxed max-w-[250px] mx-auto">
-                Código optimizado y arquitecturas modernas que garantizan tiempos de carga ultrarrápidos.
+                {t('bento.performance.desc')}
               </p>
             </div>
           </div>
@@ -67,9 +69,9 @@ export function BentoGridFeatures() {
             <div className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6 mx-auto md:mx-0">
               <Shield className="w-5 h-5 text-neutral-300" />
             </div>
-            <h3 className="text-lg font-bold text-white tracking-tight mb-3">Métricas en tiempo real</h3>
+            <h3 className="text-lg font-bold text-white tracking-tight mb-3">{t('bento.metrics.title')}</h3>
             <p className="text-sm text-neutral-500 font-medium leading-relaxed max-w-sm mx-auto md:mx-0">
-              Monitoreá el estado de tu plataforma, ventas e interacciones en un dashboard intuitivo. Toma decisiones basadas en datos.
+              {t('bento.metrics.desc')}
             </p>
           </div>
 
@@ -96,23 +98,23 @@ export function BentoGridFeatures() {
             <div className="w-10 h-10 rounded-full border border-white/10 bg-white/5 flex items-center justify-center mb-6 mx-auto md:mx-0">
               <Users className="w-5 h-5 text-neutral-300" />
             </div>
-            <h3 className="text-lg font-bold text-white tracking-tight mb-3">Gestión integral de usuarios</h3>
+            <h3 className="text-lg font-bold text-white tracking-tight mb-3">{t('bento.users.title')}</h3>
             <p className="text-sm text-neutral-500 font-medium leading-relaxed max-w-sm mx-auto md:mx-0">
-              Administrá accesos, roles y permisos de tu equipo o clientes de forma centralizada y escalable.
+              {t('bento.users.desc')}
             </p>
           </div>
 
           <div className="relative z-10 w-full md:w-1/2 h-40 md:h-full flex flex-col justify-center items-center md:items-end gap-3 mt-6 md:mt-0 md:pr-4">
             <div className="flex items-center gap-2 bg-neutral-900 border border-white/10 rounded-full py-1.5 px-3 md:translate-x-4">
-              <span className="text-[10px] font-bold text-white">Admin</span>
+              <span className="text-[10px] font-bold text-white">{t('bento.users.admin')}</span>
               <div className="w-6 h-6 rounded-full bg-blue-500 overflow-hidden flex items-center justify-center text-xs font-bold text-white">GM</div>
             </div>
             <div className="flex items-center gap-2 bg-neutral-900 border border-white/10 rounded-full py-1.5 px-3 md:-translate-x-8">
               <div className="w-6 h-6 rounded-full bg-emerald-500 overflow-hidden flex items-center justify-center text-xs font-bold text-white">CL</div>
-              <span className="text-[10px] font-bold text-white">Cliente</span>
+              <span className="text-[10px] font-bold text-white">{t('bento.users.client')}</span>
             </div>
             <div className="flex items-center gap-2 bg-neutral-900 border border-white/10 rounded-full py-1.5 px-3 md:translate-x-2">
-              <span className="text-[10px] font-bold text-white">Editor</span>
+              <span className="text-[10px] font-bold text-white">{t('bento.users.editor')}</span>
               <div className="w-6 h-6 rounded-full bg-purple-500 overflow-hidden flex items-center justify-center text-xs font-bold text-white">ED</div>
             </div>
           </div>

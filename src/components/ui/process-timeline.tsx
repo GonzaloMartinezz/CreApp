@@ -2,11 +2,12 @@ import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { Search, PenTool, Code2, Rocket } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useLanguage } from '@/context/LanguageContext'
 
 export interface ProcessStep {
   num: string
-  title: string
-  desc: string
+  titleKey: string
+  descKey: string
   iconName: string
   color: string
 }
@@ -14,29 +15,29 @@ export interface ProcessStep {
 const DEFAULT_STEPS: ProcessStep[] = [
   {
     num: '01',
-    title: 'Descubrimiento & Estrategia',
-    desc: 'Analizamos a fondo tu modelo de negocio, definimos las metas operativas e investigamos detalladamente la experiencia ideal para tus usuarios.',
+    titleKey: 'process.step1.title',
+    descKey: 'process.step1.desc',
     iconName: 'Search',
     color: 'from-neutral-800 to-neutral-700',
   },
   {
     num: '02',
-    title: 'Diseño UX/UI & Prototipado',
-    desc: 'Creamos interfaces modernas de alta fidelidad. Diseñamos prototipos totalmente interactivos y navegables antes de comenzar a escribir código.',
+    titleKey: 'process.step2.title',
+    descKey: 'process.step2.desc',
     iconName: 'PenTool',
     color: 'from-neutral-700 to-emerald-900',
   },
   {
     num: '03',
-    title: 'Desarrollo de Software ágil',
-    desc: 'Programamos tu app con código escalable, limpio y testeado. Realizamos entregas continuas semanales en un servidor de pruebas dedicado.',
+    titleKey: 'process.step3.title',
+    descKey: 'process.step3.desc',
     iconName: 'Code2',
     color: 'from-emerald-900 to-emerald-600',
   },
   {
     num: '04',
-    title: 'Lanzamiento & Escalabilidad',
-    desc: 'Publicamos tu app en las tiendas de Apple y Google o en servidores Cloud optimizados, y te brindamos soporte de infraestructura post-lanzamiento.',
+    titleKey: 'process.step4.title',
+    descKey: 'process.step4.desc',
     iconName: 'Rocket',
     color: 'from-emerald-600 to-emerald-400',
   },
@@ -44,6 +45,7 @@ const DEFAULT_STEPS: ProcessStep[] = [
 
 export function ProcessTimeline() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const { t } = useLanguage()
 
   // Track scroll progress inside the timeline container
   const { scrollYProgress } = useScroll({
@@ -114,15 +116,15 @@ export function ProcessTimeline() {
                     'inline-block mb-4 rounded-full bg-linear-to-r px-4 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-white',
                     step.color
                   )}>
-                    Paso {step.num}
+                    {t('process.step.label')} {step.num}
                   </span>
 
                   <h3 className="mb-3 text-lg font-black text-white md:text-xl">
-                    {step.title}
+                    {t(step.titleKey as any)}
                   </h3>
 
                   <p className="text-sm font-medium leading-relaxed text-neutral-400">
-                    {step.desc}
+                    {t(step.descKey as any)}
                   </p>
                 </div>
               </motion.div>

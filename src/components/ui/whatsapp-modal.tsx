@@ -34,24 +34,25 @@ export function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
   const WHATSAPP_URL = "https://wa.me/5493816242482?text=Hola%20Gonzalo!%20Me%20gustar%C3%ADa%20contactarme%20con%20vos."
 
   return (
-    <div 
-      className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm transition-all duration-300"
+    <div
+      className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm transition-all duration-300"
       onClick={handleOverlayClick}
       aria-modal="true"
       role="dialog"
       aria-labelledby="whatsapp-modal-title"
     >
-      <div className="absolute bottom-28 right-6 sm:bottom-32 sm:right-24 w-[calc(100%-3rem)] sm:w-full max-w-[360px] overflow-hidden rounded-3xl bg-[#0a0f16] border border-white/10 shadow-2xl shadow-black/80 animate-in slide-in-from-bottom-12 slide-in-from-right-12 fade-in zoom-in-95 duration-300 origin-bottom-right">
-        
+      <div className="absolute bottom-24 left-6 sm:bottom-28 sm:left-24 w-[calc(100%-3rem)] sm:w-full max-w-[360px] overflow-hidden rounded-3xl bg-[#0a0f16] border border-white/10 shadow-2xl shadow-black/80 animate-in slide-in-from-bottom-12 slide-in-from-left-12 fade-in zoom-in-95 duration-300 origin-bottom-left">
+
         {/* Header */}
         <div className="flex items-center justify-between border-b border-white/10 bg-[#121822] px-6 py-5 text-white">
           <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10">
-              <MessageCircle className="h-5 w-5" />
+            <div className="flex h-10 w-10 overflow-hidden items-center justify-center rounded-full bg-black border border-white/20">
+              <img src="/LogoPerfil.jpg" alt="Logo" className="w-full h-full object-cover object-center scale-[1.15]" onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextElementSibling?.classList.remove('hidden'); }} />
+              <MessageCircle className="h-5 w-5 hidden" />
             </div>
-            <h2 id="whatsapp-modal-title" className="text-xl font-black tracking-tight">Contacto</h2>
+            <h2 id="whatsapp-modal-title" className="text-xl font-black tracking-tight">Hola! Contactame</h2>
           </div>
-          <button 
+          <button
             onClick={onClose}
             className="flex h-8 w-8 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20 cursor-pointer"
             aria-label="Cerrar modal"
@@ -61,42 +62,42 @@ export function WhatsAppModal({ isOpen, onClose }: WhatsAppModalProps) {
         </div>
 
         {/* Body - Contact Links */}
-        <div className="p-6 space-y-4">
-          <a 
-            href={WHATSAPP_URL} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-[#25D366] px-4 py-4 text-base font-black uppercase tracking-wider text-black shadow-lg shadow-[#25D366]/20 transition-all hover:-translate-y-1 hover:shadow-[#25D366]/40 active:translate-y-0"
+        <div className="p-6 grid grid-cols-2 gap-4">
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#25D366] p-4 text-xs font-bold uppercase tracking-wider text-black shadow-lg shadow-[#25D366]/20 transition-all hover:-translate-y-1 hover:shadow-[#25D366]/40 active:translate-y-0 aspect-square"
           >
-            <MessageCircle className="h-5 w-5 transition-transform group-hover:scale-110" />
+            <MessageCircle className="h-8 w-8 transition-transform group-hover:scale-110" />
             <span>WhatsApp</span>
           </a>
-          
-          <a 
-            href="mailto:gonchimartinez9@gmail.com" 
-            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-blue-600 px-4 py-4 text-base font-black uppercase tracking-wider text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-1 hover:shadow-blue-600/40 active:translate-y-0"
+
+          <a
+            href="mailto:gonchimartinez9@gmail.com"
+            className="group flex flex-col items-center justify-center gap-3 rounded-2xl bg-blue-600 p-4 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-blue-600/20 transition-all hover:-translate-y-1 hover:shadow-blue-600/40 active:translate-y-0 aspect-square"
           >
-            <Mail className="h-5 w-5 transition-transform group-hover:scale-110" />
+            <Mail className="h-8 w-8 transition-transform group-hover:scale-110" />
             <span>Email</span>
           </a>
 
-          <a 
-            href="https://instagram.com/gonzalomartinez" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-[#E1306C] px-4 py-4 text-base font-black uppercase tracking-wider text-white shadow-lg shadow-[#E1306C]/20 transition-all hover:-translate-y-1 hover:shadow-[#E1306C]/40 active:translate-y-0"
+          <a
+            href="https://www.instagram.com/gonchi_martinezz/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#E1306C] p-4 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#E1306C]/20 transition-all hover:-translate-y-1 hover:shadow-[#E1306C]/40 active:translate-y-0 aspect-square"
           >
-            <InstagramIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
+            <InstagramIcon className="h-8 w-8 transition-transform group-hover:scale-110" />
             <span>Instagram</span>
           </a>
 
-          <a 
-            href="https://www.linkedin.com/in/gonzalomartinezz2004" 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-[#0077b5] px-4 py-4 text-base font-black uppercase tracking-wider text-white shadow-lg shadow-[#0077b5]/20 transition-all hover:-translate-y-1 hover:shadow-[#0077b5]/40 active:translate-y-0"
+          <a
+            href="https://www.linkedin.com/in/gonzalomartinezz2004"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#0077b5] p-4 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-[#0077b5]/20 transition-all hover:-translate-y-1 hover:shadow-[#0077b5]/40 active:translate-y-0 aspect-square"
           >
-            <LinkedinIcon className="h-5 w-5 transition-transform group-hover:scale-110" />
+            <LinkedinIcon className="h-8 w-8 transition-transform group-hover:scale-110" />
             <span>LinkedIn</span>
           </a>
         </div>

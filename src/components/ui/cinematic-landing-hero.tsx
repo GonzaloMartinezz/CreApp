@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-import { MessageCircle, Calendar } from "lucide-react";
+import { MessageCircle, Calendar, CheckCircle } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
 import { ParticleNetwork } from "@/components/ui/particle-network";
 
 if (typeof window !== "undefined") {
@@ -197,6 +198,7 @@ export function CinematicLandingHero({
   className,
   ...props
 }: CinematicHeroProps) {
+  const { t } = useLanguage();
 
   const containerRef = useRef<HTMLDivElement>(null);
   const mainCardRef = useRef<HTMLDivElement>(null);
@@ -205,6 +207,11 @@ export function CinematicLandingHero({
 
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState("");
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+
+  useEffect(() => {
+    setIsMobileDevice(window.innerWidth < 768);
+  }, []);
 
   // 1. High-Performance Mouse Interaction Logic (Using requestAnimationFrame)
   useEffect(() => {
@@ -278,8 +285,6 @@ export function CinematicLandingHero({
           { y: 0, z: 0, rotationX: 0, rotationY: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 2.5 }, "-=0.8"
         )
         .fromTo(".phone-widget", { y: 40, autoAlpha: 0, scale: 0.95 }, { y: 0, autoAlpha: 1, scale: 1, stagger: 0.15, ease: "back.out(1.2)", duration: 1.5 }, "-=1.5")
-        .to(".progress-ring", { strokeDashoffset: 60, duration: 2, ease: "power3.inOut" }, "-=1.2")
-        .to(".counter-val", { innerHTML: metricValue, snap: { innerHTML: 1 }, duration: 2, ease: "expo.out" }, "-=2.0")
         .fromTo(".floating-badge", { y: 100, autoAlpha: 0, scale: 0.7, rotationZ: -10 }, { y: 0, autoAlpha: 1, scale: 1, rotationZ: 0, ease: "back.out(1.5)", duration: 1.5, stagger: 0.2 }, "-=2.0")
         .fromTo(".card-left-text", { x: -50, autoAlpha: 0 }, { x: 0, autoAlpha: 1, ease: "power4.out", duration: 1.5 }, "-=1.5")
         .fromTo(".card-right-text", { x: 50, autoAlpha: 0, scale: 0.8 }, { x: 0, autoAlpha: 1, scale: 1, ease: "expo.out", duration: 1.5 }, "<")
@@ -316,8 +321,8 @@ export function CinematicLandingHero({
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
-      <div className="absolute inset-0 z-[-1] pointer-events-none opacity-100">
-        <ParticleNetwork />
+      <div className="absolute inset-0 z-[-1] pointer-events-none opacity-100 hidden md:block">
+        {!isMobileDevice && <ParticleNetwork />}
       </div>
 
       {/* BACKGROUND LAYER: Hero Texts */}
@@ -445,10 +450,10 @@ export function CinematicLandingHero({
                       {/* Header: Tu App */}
                       <div className="phone-widget flex justify-between items-center mb-5 pl-3">
                         <div className="flex flex-col">
-                          <span className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold mb-0.5">Dashboard</span>
+                          <span className="text-[10px] text-neutral-400 uppercase tracking-widest font-bold mb-0.5">{t('hero.mockup.dashboard' as any)}</span>
                           <div className="flex items-center gap-2">
                             <img src="/LOGO PROFESIONAL.webp" alt="App Logo" className="h-6 w-6 rounded-full object-cover bg-white" />
-                            <span className="text-lg font-black tracking-tight text-white drop-shadow-md">Tu App</span>
+                            <span className="text-lg font-black tracking-tight text-white drop-shadow-md">{t('hero.mockup.app' as any)}</span>
                           </div>
                         </div>
                       </div>
@@ -463,8 +468,8 @@ export function CinematicLandingHero({
                             </svg>
                           </div>
                           <div className="flex-1">
-                            <p className="text-[11px] font-bold text-white tracking-tight">Chatbot IA</p>
-                            <p className="text-[9px] text-purple-300/60 font-medium">Asistente inteligente 24/7</p>
+                            <p className="text-[11px] font-bold text-white tracking-tight">{t('hero.mockup.chatbot' as any)}</p>
+                            <p className="text-[9px] text-purple-300/60 font-medium">{t('hero.mockup.chatbot.desc' as any)}</p>
                           </div>
                           <div className="w-2 h-2 rounded-full bg-purple-400 animate-pulse shadow-[0_0_6px_rgba(168,85,247,0.6)]" />
                         </div>
@@ -477,8 +482,8 @@ export function CinematicLandingHero({
                             </svg>
                           </div>
                           <div className="flex-1">
-                            <p className="text-[11px] font-bold text-white tracking-tight">WhatsApp Business</p>
-                            <p className="text-[9px] text-emerald-300/60 font-medium">Integración directa</p>
+                            <p className="text-[11px] font-bold text-white tracking-tight">{t('hero.mockup.whatsapp' as any)}</p>
+                            <p className="text-[9px] text-emerald-300/60 font-medium">{t('hero.mockup.whatsapp.desc' as any)}</p>
                           </div>
                           <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_6px_rgba(52,211,153,0.6)]" />
                         </div>
@@ -492,12 +497,12 @@ export function CinematicLandingHero({
                               </svg>
                             </div>
                             <div className="flex-1">
-                              <p className="text-[11px] font-bold text-orange-300 tracking-tight">Análisis Completo</p>
+                              <p className="text-[11px] font-bold text-orange-300 tracking-tight">{t('hero.mockup.analytics' as any)}</p>
                             </div>
                           </div>
                           <div className="flex flex-wrap items-center gap-2 ml-[52px]">
-                            <span className="px-2 py-0.5 rounded-full bg-orange-500/15 text-[8px] font-bold text-orange-300 border border-orange-500/20">+Vistas</span>
-                            <span className="px-2 py-0.5 rounded-full bg-orange-500/15 text-[8px] font-bold text-orange-300 border border-orange-500/20">+Ventas</span>
+                            <span className="px-2 py-0.5 rounded-full bg-orange-500/15 text-[8px] font-bold text-orange-300 border border-orange-500/20">{t('hero.mockup.analytics.views' as any)}</span>
+                            <span className="px-2 py-0.5 rounded-full bg-orange-500/15 text-[8px] font-bold text-orange-300 border border-orange-500/20">{t('hero.mockup.analytics.sales' as any)}</span>
                           </div>
                         </div>
 
@@ -509,7 +514,7 @@ export function CinematicLandingHero({
                             </svg>
                           </div>
                           <div className="flex-1">
-                            <p className="text-[10px] font-bold text-indigo-300 tracking-tight">Lógica de Negocio</p>
+                            <p className="text-[10px] font-bold text-indigo-300 tracking-tight">{t('hero.mockup.logic' as any)}</p>
                           </div>
                         </div>
 
@@ -521,7 +526,7 @@ export function CinematicLandingHero({
                             </svg>
                           </div>
                           <div className="flex-1">
-                            <p className="text-[10px] font-bold text-cyan-300 tracking-tight">Integración Digital</p>
+                            <p className="text-[10px] font-bold text-cyan-300 tracking-tight">{t('hero.mockup.integration' as any)}</p>
                           </div>
                         </div>
                       </div>
@@ -534,13 +539,13 @@ export function CinematicLandingHero({
 
                 {/* Floating Badges on edges of phone */}
                 {/* Top Left: +15 Apps */}
-                <div className="floating-badge absolute flex top-[90px] left-[-60px] lg:left-[-80px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30">
+                <div className="floating-badge absolute flex top-[90px] left-[-80px] lg:left-[-110px] floating-ui-badge rounded-xl lg:rounded-2xl p-2.5 lg:p-3 items-center gap-2.5 lg:gap-3 z-30">
                   <div className="w-7 h-7 lg:w-9 lg:h-9 rounded-full bg-linear-to-b from-orange-500/20 to-orange-900/10 flex items-center justify-center border border-orange-400/30 shadow-inner">
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">🚀</span>
                   </div>
                   <div>
-                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">+15 Apps</p>
-                    <p className="text-orange-200/50 text-[8px] lg:text-[10px] font-medium">Entregas Exitosas</p>
+                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">{t('hero.mockup.badge.apps' as any)}</p>
+                    <p className="text-orange-200/50 text-[8px] lg:text-[10px] font-medium">{t('hero.mockup.badge.apps.desc' as any)}</p>
                   </div>
                 </div>
 
@@ -550,8 +555,8 @@ export function CinematicLandingHero({
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">🎯</span>
                   </div>
                   <div>
-                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">Proceso Personalizado</p>
-                    <p className="text-emerald-200/50 text-[8px] lg:text-[10px] font-medium">Análisis de Negocios</p>
+                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">{t('hero.mockup.badge.process' as any)}</p>
+                    <p className="text-emerald-200/50 text-[8px] lg:text-[10px] font-medium">{t('hero.mockup.badge.process.desc' as any)}</p>
                   </div>
                 </div>
 
@@ -561,8 +566,8 @@ export function CinematicLandingHero({
                     <span className="text-sm lg:text-base drop-shadow-lg" aria-hidden="true">⭐</span>
                   </div>
                   <div>
-                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">100% Satisfacción</p>
-                    <p className="text-blue-200/50 text-[8px] lg:text-[10px] font-medium">Clientes Conformes</p>
+                    <p className="text-white text-[10px] lg:text-xs font-bold tracking-tight">{t('hero.mockup.badge.satisfaction' as any)}</p>
+                    <p className="text-blue-200/50 text-[8px] lg:text-[10px] font-medium">{t('hero.mockup.badge.satisfaction.desc' as any)}</p>
                   </div>
                 </div>
 

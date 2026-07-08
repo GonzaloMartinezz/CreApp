@@ -26,6 +26,7 @@
   --animate-orb-float-1: orb-float-1 25s infinite alternate ease-in-out;
   --animate-orb-float-2: orb-float-2 30s infinite alternate ease-in-out;
   --animate-orb-float-3: orb-float-3 20s infinite alternate ease-in-out;
+  --animate-spin-slow: spin-slow 8s linear infinite;
 }
 
 @keyframes orb-float-1 {
@@ -48,6 +49,26 @@
 
 @keyframes text-shine {
   to { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-x {
+  0%, 100% {
+    transform: translateX(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateX(-15%);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.animate-bounce-x {
+  animation: bounce-x 1.5s infinite;
 }
 
 

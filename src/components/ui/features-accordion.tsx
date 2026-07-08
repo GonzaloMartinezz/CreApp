@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/context/LanguageContext"
 
 export interface AccordionFeature {
   id: string
@@ -22,6 +23,7 @@ interface FeaturesAccordionProps {
 
 export function FeaturesAccordion({ features, className }: FeaturesAccordionProps) {
   const [openIndex, setOpenIndex] = useState<number>(0)
+  const { t } = useLanguage()
 
   return (
     <div className={cn("w-full max-w-4xl mx-auto rounded-3xl border border-white/10 bg-[#0B0B0C] p-4 md:p-6 shadow-2xl", className)}>
@@ -48,11 +50,13 @@ export function FeaturesAccordion({ features, className }: FeaturesAccordionProp
                     <img
                       src={feature.iconSrc}
                       alt={feature.title}
-                      className="h-full w-full object-cover"
+                      loading="lazy"
+                      decoding="async"
+                      className="w-full h-full object-cover"
                     />
                   </div>
                   <h3 className="text-left text-lg md:text-xl font-bold tracking-tight text-white group-hover:text-neutral-200 transition-colors">
-                    {feature.title}
+                    {t(feature.title as any)}
                   </h3>
                 </div>
 
@@ -82,11 +86,13 @@ export function FeaturesAccordion({ features, className }: FeaturesAccordionProp
                         <img
                           src={feature.imageSrc}
                           alt={feature.title}
+                          loading="lazy"
+                          decoding="async"
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <p className="mt-6 text-center text-[clamp(1rem,1.5vw,1.2rem)] font-medium text-neutral-300">
-                        {feature.subtitle}
+                        {t(feature.subtitle as any)}
                         {feature.link && (
                           <a
                             href={feature.link}
@@ -94,7 +100,7 @@ export function FeaturesAccordion({ features, className }: FeaturesAccordionProp
                             rel="noreferrer"
                             className="mt-2 block text-accent-400 hover:text-white underline decoration-white/30 underline-offset-4 transition-colors"
                           >
-                            Ver Proyecto ↗
+                            {t('features.link')}
                           </a>
                         )}
                       </p>
@@ -102,10 +108,10 @@ export function FeaturesAccordion({ features, className }: FeaturesAccordionProp
                   </motion.div>
                 )}
               </AnimatePresence>
-              
+
               {/* Divider line (unless it's the last item and it's not open) */}
               {idx !== features.length - 1 && (
-                <div className="h-[1px] w-[calc(100%-2rem)] mx-auto bg-white/5 mt-1" />
+                <div className="h-px w-[calc(100%-2rem)] mx-auto bg-white/5 mt-1" />
               )}
             </div>
           )

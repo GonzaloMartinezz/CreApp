@@ -1,24 +1,24 @@
 import { CinematicLandingHero } from '@/components/ui/cinematic-landing-hero'
-import { GalleryHoverCarousel } from '@/components/ui/gallery-hover-carousel'
 import { Navbar } from '@/components/ui/navbar'
-import { ServiceCard } from '@/components/ui/service-card'
-import { ProcessTimeline } from '@/components/ui/process-timeline'
-import { AppCalculator } from '@/components/ui/app-calculator'
-import { FAQAccordion } from '@/components/ui/faq-accordion'
-import { ContactForm } from '@/components/ui/contact-form'
-import { GoogleGeminiEffectDemo } from '@/components/ui/google-gemini-demo'
 import { SocialIcons } from '@/components/ui/social-icons'
-import { BackgroundPaths } from '@/components/ui/background-paths'
-
-// Importaciones modulares extraídas
-import { SERVICES, STATS, PORTFOLIO_PROJECTS, FEATURES_ACCORDION_DATA } from '@/data/constants'
 import { D, Label } from '@/components/ui/primitives'
 import { StatCounter } from '@/components/ui/stat-counter'
-import { FeaturesAccordion } from '@/components/ui/features-accordion'
-import { ProfessionalMetrics } from '@/components/ui/professional-metrics'
+import { SERVICES, STATS, PORTFOLIO_PROJECTS, FEATURES_ACCORDION_DATA } from '@/data/constants'
 import { motion, type Variants } from 'framer-motion'
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
+
+// Lazy loaded components for better performance
+const GalleryHoverCarousel = lazy(() => import('@/components/ui/gallery-hover-carousel').then(m => ({ default: m.GalleryHoverCarousel })))
+const ServiceCard = lazy(() => import('@/components/ui/service-card').then(m => ({ default: m.ServiceCard })))
+const ProcessTimeline = lazy(() => import('@/components/ui/process-timeline').then(m => ({ default: m.ProcessTimeline })))
+const AppCalculator = lazy(() => import('@/components/ui/app-calculator').then(m => ({ default: m.AppCalculator })))
+const FAQAccordion = lazy(() => import('@/components/ui/faq-accordion').then(m => ({ default: m.FAQAccordion })))
+const ContactForm = lazy(() => import('@/components/ui/contact-form').then(m => ({ default: m.ContactForm })))
+const GoogleGeminiEffectDemo = lazy(() => import('@/components/ui/google-gemini-demo').then(m => ({ default: m.GoogleGeminiEffectDemo })))
+const BackgroundPaths = lazy(() => import('@/components/ui/background-paths').then(m => ({ default: m.BackgroundPaths })))
+const FeaturesAccordion = lazy(() => import('@/components/ui/features-accordion').then(m => ({ default: m.FeaturesAccordion })))
+const ProfessionalMetrics = lazy(() => import('@/components/ui/professional-metrics').then(m => ({ default: m.ProfessionalMetrics })))
 
 // Animaciones de entrada al hacer scroll (scroll-driven animations)
 const fadeInUp: Variants = {
@@ -40,7 +40,7 @@ export default function App() {
   const { t } = useLanguage()
 
   return (
-    <>
+    <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div></div>}>
       {/* 0. STICKY GLASS NAVIGATION BAR */}
       <Navbar brandName="Gonzalo M." />
 
@@ -141,8 +141,8 @@ export default function App() {
               {SERVICES.map(({ icon, title, desc }) => (
                 <motion.div variants={fadeInUp} key={title} className="h-full">
                   <ServiceCard
-                    title={title}
-                    desc={desc}
+                    title={t(title as any)}
+                    desc={t(desc as any)}
                     iconName={icon}
                   />
                 </motion.div>
@@ -175,7 +175,12 @@ export default function App() {
             </div>
 
             <h2 className="text-[clamp(3.1rem,9vw,10rem)] font-black uppercase leading-[0.85] tracking-tight text-left text-(--color-foreground)">
-              Paso A Paso.<br />Metodología Ágil.
+              {t('process.title').split('. ').map((part: string, i: number, arr: string[]) => (
+                <React.Fragment key={i}>
+                  {part}{i < arr.length - 1 ? '.' : ''}
+                  {i === 0 && <br />}
+                </React.Fragment>
+              ))}
             </h2>
 
             <D className="opacity-15" />
@@ -213,17 +218,15 @@ export default function App() {
         </div>
 
         <GalleryHoverCarousel
-          heading="Proyectos destacados"
+          heading={t('portfolio.carousel.heading')}
           items={PORTFOLIO_PROJECTS}
           className="mx-[-4vw]"
         />
 
         <div className="mt-24 mb-8 flex flex-col gap-4">
-          <Label>Soluciones</Label>
+          <Label>{t('portfolio.solutions.label')}</Label>
           <D />
-          <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase leading-[0.85] tracking-tight text-(--color-foreground)">
-            Potencia tu <br/> negocio
-          </h2>
+          <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase leading-[0.85] tracking-tight text-(--color-foreground)" dangerouslySetInnerHTML={{ __html: t('portfolio.solutions.title') }} />
           <D />
         </div>
 
@@ -429,7 +432,7 @@ export default function App() {
 
           {/* Column 1: Logo (Standalone, large, centered vertically) */}
           <div className="flex shrink-0 items-center justify-center lg:justify-start">
-            <img src="/LOGO PROFESIONAL.webp" alt="Logo" className="h-28 w-28 md:h-36 md:w-36 rounded-full object-cover bg-white shadow-2xl" />
+            <img src="/LOGO PROFESIONAL.webp" alt="Logo" loading="lazy" decoding="async" className="h-28 w-28 md:h-36 md:w-36 rounded-full object-cover bg-white shadow-2xl" />
           </div>
 
           {/* Column 2: Brand Text */}
@@ -438,12 +441,12 @@ export default function App() {
               {t('footer.brandName')}
             </span>
             <p className="text-xs leading-relaxed text-(--color-muted)">
-              Desarrollo de software y aplicaciones móviles de alto impacto diseñadas para digitalizar y automatizar operaciones comerciales.
+              {t('footer.description')}
             </p>
             <div className="flex items-center gap-2 mt-2">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-500 shadow-[0_0_6px_rgba(34,197,94,0.8)]" />
               <span className="text-[9px] font-bold uppercase tracking-widest text-green-600">
-                Servicios disponibles y operando
+                {t('footer.status')}
               </span>
             </div>
           </div>
@@ -456,28 +459,28 @@ export default function App() {
           {/* Column 4: Navigation Links (Side-by-side on desktop, stacked on mobile) */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 text-center sm:text-left">
             <div className="flex flex-col items-center sm:items-start space-y-3">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Navegación</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.nav.title')}</p>
               <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
-                <li><a href="#quienes-somos" className="hover:text-(--color-accent) transition-colors duration-200">Nosotros</a></li>
-                <li><a href="#servicios" className="hover:text-(--color-accent) transition-colors duration-200">Servicios</a></li>
-                <li><a href="#proceso" className="hover:text-(--color-accent) transition-colors duration-200">Metodología</a></li>
+                <li><a href="#quienes-somos" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.about')}</a></li>
+                <li><a href="#servicios" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.services')}</a></li>
+                <li><a href="#proceso" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.process')}</a></li>
               </ul>
             </div>
 
             <div className="flex flex-col items-center sm:items-start space-y-3">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Herramientas</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.tools.title')}</p>
               <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
-                <li><a href="#cotizador" className="hover:text-(--color-accent) transition-colors duration-200">Cotizador</a></li>
-                <li><a href="#portfolio" className="hover:text-(--color-accent) transition-colors duration-200">Portfolio</a></li>
-                <li><a href="#contacto" className="hover:text-(--color-accent) transition-colors duration-200">Contacto</a></li>
+                <li><a href="#cotizador" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.calculator')}</a></li>
+                <li><a href="#portfolio" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.portfolio')}</a></li>
+                <li><a href="#contacto" className="hover:text-(--color-accent) transition-colors duration-200">{t('nav.contact')}</a></li>
               </ul>
             </div>
 
             <div className="flex flex-col items-center sm:items-start space-y-3">
-              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">Legal</p>
+              <p className="text-[10px] font-bold uppercase tracking-widest text-(--color-foreground)">{t('footer.legal.title')}</p>
               <ul className="space-y-2 text-xs text-(--color-muted) flex flex-col items-center sm:items-start">
-                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">Términos de Servicio</a></li>
-                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">Política de Privacidad</a></li>
+                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">{t('footer.legal.terms')}</a></li>
+                <li><a href="#" className="hover:text-(--color-accent) transition-colors duration-200">{t('footer.legal.privacy')}</a></li>
               </ul>
             </div>
           </div>
@@ -486,11 +489,11 @@ export default function App() {
         <div className="mx-auto w-full max-w-[1000px] h-px bg-(--color-border) my-6" />
 
         <div className="mx-auto flex w-full max-w-[1000px] flex-col items-center justify-between gap-3 md:flex-row text-[11px] text-(--color-muted)">
-          <span>© {new Date().getFullYear()} Gonzalo Martínez. Todos los derechos reservados.</span>
+          <span>© {new Date().getFullYear()} Gonzalo Martínez. {t('footer.rights')}</span>
           <span className="hidden sm:block">{t('footer.copyright')}</span>
           <span className="text-(--color-accent) font-semibold">{t('footer.madeBy')}</span>
         </div>
       </footer>
-    </>
+    </Suspense>
   )
 }

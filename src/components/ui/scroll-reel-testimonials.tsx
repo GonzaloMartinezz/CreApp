@@ -61,7 +61,7 @@ function Cell() {
   return (
     <div
       aria-hidden="true"
-      className="shrink-0 rounded-xl border border-border bg-gradient-to-b from-secondary to-card blur-[1px] shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_2px_0_rgba(255,255,255,1)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.06)]"
+      className="shrink-0 rounded-xl border border-border bg-linear-to-b from-secondary to-card blur-[1px] shadow-[0_1px_2px_rgba(0,0,0,0.05),inset_0_2px_0_rgba(255,255,255,1)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.06)]"
       style={{ width: CELL, height: CELL }}
     />
   );
@@ -83,12 +83,12 @@ function Featured({ src, alt }: { src: string; alt?: string }) {
       {/* desaturate via saturation blend */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[2] bg-white mix-blend-saturation"
+        className="pointer-events-none absolute inset-0 z-2 bg-white mix-blend-saturation"
       />
       {/* diagonal gradient sheen */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-[3] blur-[6px] mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 z-3 blur-[6px] mix-blend-overlay"
         style={{
           background:
             "linear-gradient(220.99deg, rgba(108,92,255,0) 32%, rgb(108,92,255) 41%, rgb(173,177,255) 47%, rgba(130,189,237,0.57) 54%, rgba(130,189,237,0) 65%)",

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, memo } from 'react'
 import * as Icons from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -9,7 +9,7 @@ export interface ServiceCardProps {
   className?: string
 }
 
-export function ServiceCard({ title, desc, iconName, className }: ServiceCardProps) {
+export const ServiceCard = memo(function ServiceCard({ title, desc, iconName, className }: ServiceCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
   const [rotateX, setRotateX] = useState(0)
   const [rotateY, setRotateY] = useState(0)
@@ -111,4 +111,4 @@ export function ServiceCard({ title, desc, iconName, className }: ServiceCardPro
       />
     </div>
   )
-}
+})

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Menu, X, ArrowUpRight, MessageCircle, Send } from 'lucide-react'
+import { Menu, X, ArrowUpRight, MessageCircle, Send, Bot } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { WhatsAppModal } from '@/components/ui/whatsapp-modal'
+import { ChatbotModal } from '@/components/ui/chatbot-modal'
 import { useLanguage } from '@/context/LanguageContext'
 
 export interface NavbarProps {
@@ -15,6 +16,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('inicio')
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false)
 
   // Smooth scroll handler
   const handleScrollTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
@@ -228,7 +230,7 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
                 <span className="text-[10px] font-bold text-success uppercase tracking-wider">WhatsApp</span>
               </a>
             </div>
-            
+
             <div className="mt-2 flex justify-between text-[10px] text-neutral-600 px-3 shrink-0 font-medium">
               <span>{t('nav.drawer.responseRate')}</span>
               <span>{t('nav.drawer.studio')}</span>
@@ -237,21 +239,60 @@ export function Navbar({ brandName = 'CreAPP' }: NavbarProps) {
         </div>
       </div>
 
-      {/* ── FLOATING PULSING WHATSAPP BUTTON (BOTTOM-RIGHT) ── */}
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="fixed bottom-6 right-6 z-90 flex h-14 w-14 items-center justify-center rounded-full bg-success text-white shadow-[0_8px_32px_rgba(34,197,94,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce hover:animate-none group"
-        aria-label="Contactar por WhatsApp"
-        style={{
-          boxShadow: '0 8px 32px rgba(34, 197, 94, 0.4), inset 0 1px 0 rgba(255,255,255,0.25)',
-          animationDuration: '3s'
-        }}
+      {/* ── STICKY "QUIEN SOY" BUTTON (LEFT EDGE) ── */}
+      <a
+        href="https://mi-portafolioblogg.vercel.app/"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed top-1/2 left-0 z-99 -translate-y-1/2 flex items-center justify-center bg-surface border border-[#ff7a00] border-l-0 text-[#ff7a00] px-2 py-6 rounded-r-xl shadow-[4px_0_20px_rgba(255,122,0,0.15)] hover:bg-[#ff7a00] hover:text-white transition-colors duration-300 cursor-pointer group backdrop-blur-md"
+        aria-label="Ver mi portafolio"
       >
-        <span className="absolute inset-0 rounded-full bg-success opacity-40 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
-        <MessageCircle className="h-6 w-6 fill-white/10 transition-transform duration-300 group-hover:rotate-12" />
-      </button>
-      {/* ── WHATSAPP MODAL ── */}
+        <span className="text-xs font-black uppercase tracking-widest whitespace-nowrap" style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}>
+          ¿Quién Soy?
+        </span>
+      </a>
+
+      {/* ── FLOATING BUTTONS CONTAINER (BOTTOM-LEFT) ── */}
+      <div className="fixed bottom-6 left-6 z-99 flex flex-col items-center gap-6 pointer-events-none">
+        {/* Contact/Social Button - Spinning Logo */}
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="relative flex h-[60px] w-[60px] items-center justify-center rounded-full bg-black border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer group pointer-events-auto overflow-hidden p-0.5"
+          aria-label="Abrir redes de contacto"
+        >
+          {/* Logo animado. Usamos fallback si no existe la imagen */}
+          <img
+            src="/LogoPerfil.jpg"
+            alt="Logo"
+            className="w-full h-full rounded-full object-cover object-center scale-[1.15] animate-spin-slow group-hover:animate-none"
+            onError={(e) => {
+              e.currentTarget.style.display = 'none';
+              e.currentTarget.nextElementSibling?.classList.remove('hidden');
+            }}
+          />
+          <MessageCircle className="h-6 w-6 text-white hidden" />
+        </button>
+      </div>
+
+      {/* ── FLOATING BOT BUTTON CONTAINER (BOTTOM-RIGHT) ── */}
+      <div className="fixed bottom-6 right-6 z-99 flex flex-col items-center gap-6 pointer-events-none">
+        {/* AI Chatbot Button */}
+        <button
+          onClick={() => setIsChatbotOpen(true)}
+          className="relative flex h-[60px] w-[60px] md:h-[64px] md:w-[64px] items-center justify-center rounded-2xl bg-[#ff7a00] text-white shadow-[0_8px_32px_rgba(255,122,0,0.4)] transition-all duration-300 hover:scale-110 active:scale-95 cursor-pointer animate-bounce-x hover:animate-none group pointer-events-auto"
+          aria-label="Abrir asistente virtual"
+          style={{
+            boxShadow: '0 8px 32px rgba(255, 122, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.25)',
+          }}
+        >
+          <span className="absolute inset-0 rounded-2xl bg-[#ff7a00] opacity-40 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
+          <Bot className="h-7 w-7 md:h-8 md:w-8 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
+        </button>
+      </div>
+
+      {/* ── MODALS ── */}
       <WhatsAppModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ChatbotModal isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
     </>
   )
 }
