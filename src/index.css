@@ -6,22 +6,22 @@
 @theme inline {
   --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
 
-  /* Premium Dark Theme Palette (Sleek Zinc/Emerald) */
-  --color-background:     #000000;
-  --color-foreground:     #ffffff;
-  --color-surface:        #09090b;
-  --color-surface-2:      #121214;
-  --color-border:         #27272a;
-  --color-muted:          #a1a1aa;
+  /* Premium Dark Theme Palette (Sleek Midnight Blue) */
+  --color-background:     #000000; /* Keeping true blacks */
+  --color-foreground:     #cddeea; /* Color 5 - Main text */
+  --color-surface:        #060606; /* Color 1 - Deepest surface */
+  --color-surface-2:      #24293b; /* Color 2 - Elevated surface */
+  --color-border:         #5a6488; /* Color 3 - Borders */
+  --color-muted:          #98a6df; /* Color 4 - Muted text */
   
   /* Primary & Accent Color Palette */
-  --color-accent:         #10b981;
-  --color-accent-2:       #059669;
-  --color-accent-3:       #047857;
-  --color-success:        #22c55e;
-  --color-primary:        #10b981;
-  --color-primary-2:      #34d399;
-  --color-primary-3:      #059669;
+  --color-accent:         #98a6df; /* Color 4 */
+  --color-accent-2:       #5a6488; /* Color 3 */
+  --color-accent-3:       #24293b; /* Color 2 */
+  --color-success:        #98a6df; 
+  --color-primary:        #cddeea; /* Color 5 */
+  --color-primary-2:      #98a6df; /* Color 4 */
+  --color-primary-3:      #5a6488; /* Color 3 */
   
   --animate-orb-float-1: orb-float-1 25s infinite alternate ease-in-out;
   --animate-orb-float-2: orb-float-2 30s infinite alternate ease-in-out;
@@ -198,5 +198,41 @@
     animation: text-shine 3s linear infinite;
     filter: drop-shadow(0 0 16px rgba(255, 122, 0, 0.4));
   }
+}
+
+@keyframes scroll-reel-char-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scroll-reel-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+/* Base class for character animation */
+.scroll-reel-char {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: scroll-reel-char-rise 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.scroll-reel-exit .scroll-reel-char {
+  animation: none !important;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-reel-exit {
+  animation: scroll-reel-exit 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 

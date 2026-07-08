@@ -50,6 +50,14 @@ export const es = {
   "metrics.label": "04 — Métricas Operativas",
   "metrics.title": "Números Que Importan",
   "metrics.description": "Cada desarrollo está respaldado por altos estándares de calidad de código y un compromiso inquebrantable de entrega en los plazos acordados.",
+  "metrics.card1.label": "Proyectos entregados",
+  "metrics.card1.desc": "Aplicaciones y sistemas escalables en producción.",
+  "metrics.card2.label": "Compromiso de calidad",
+  "metrics.card2.desc": "Arquitectura robusta y código limpio.",
+  "metrics.card3.label": "Tasa de respuesta",
+  "metrics.card3.desc": "Soporte técnico continuo y metodología ágil.",
+  "metrics.card4.label": "Clientes satisfechos",
+  "metrics.card4.desc": "Transformando ideas en casos de éxito.",
 
   // FAQ
   "faq.label": "05 — Preguntas Frecuentes",

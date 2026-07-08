@@ -262,7 +262,7 @@ export function CinematicLandingHero({
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=7000",
+          end: "+=9000",
           pin: true,
           scrub: 1,
           anticipatePin: 1,
@@ -299,6 +299,7 @@ export function CinematicLandingHero({
           duration: 1.8
         }, "pullback")
         .to(".cta-wrapper", { scale: 1, filter: "blur(0px)", ease: "expo.inOut", duration: 1.8 }, "pullback")
+        .to({}, { duration: 6 })
         .to(".main-card", { y: -window.innerHeight - 300, ease: "power3.in", duration: 1.5 });
 
     }, containerRef);

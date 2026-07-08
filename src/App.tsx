@@ -11,9 +11,11 @@ import { SocialIcons } from '@/components/ui/social-icons'
 import { BackgroundPaths } from '@/components/ui/background-paths'
 
 // Importaciones modulares extraídas
-import { SERVICES, STATS, PORTFOLIO_PROJECTS } from '@/data/constants'
+import { SERVICES, STATS, PORTFOLIO_PROJECTS, FEATURES_ACCORDION_DATA } from '@/data/constants'
 import { D, Label } from '@/components/ui/primitives'
 import { StatCounter } from '@/components/ui/stat-counter'
+import { FeaturesAccordion } from '@/components/ui/features-accordion'
+import { ProfessionalMetrics } from '@/components/ui/professional-metrics'
 import { motion, type Variants } from 'framer-motion'
 import React from 'react'
 import { useLanguage } from '@/context/LanguageContext'
@@ -79,7 +81,7 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Quiénes somos"
-          className="relative z-10 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
+          className="relative z-10 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 border-t border-(--color-border)"
           style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
           {/* Animated floating mesh gradients for extreme premium design */}
@@ -115,8 +117,8 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Servicios"
-          className="relative z-20 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
-          style={{ backgroundColor: 'var(--color-surface)', color: 'var(--color-foreground)' }}
+          className="relative z-20 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 border-t border-(--color-border)"
+          style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
 
           <div className="relative z-10 flex flex-col gap-8 w-full" id="servicios">
@@ -162,8 +164,8 @@ export default function App() {
           viewport={{ once: true, margin: '-100px' }}
           variants={fadeInUp}
           aria-label="Proceso"
-          className="relative z-30 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 dots-pattern border-t border-(--color-border)"
-          style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-foreground)' }}
+          className="relative z-30 flex w-full flex-col justify-center gap-6 px-[4vw] py-16 md:py-24 border-t border-(--color-border)"
+          style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}
         >
 
           <div className="relative z-10 flex flex-col gap-8 w-full" id="proceso">
@@ -215,6 +217,19 @@ export default function App() {
           items={PORTFOLIO_PROJECTS}
           className="mx-[-4vw]"
         />
+
+        <div className="mt-24 mb-8 flex flex-col gap-4">
+          <Label>Soluciones</Label>
+          <D />
+          <h2 className="text-[clamp(2.5rem,6vw,8rem)] font-black uppercase leading-[0.85] tracking-tight text-(--color-foreground)">
+            Potencia tu <br/> negocio
+          </h2>
+          <D />
+        </div>
+
+        <div className="flex w-full items-center justify-center">
+          <FeaturesAccordion features={FEATURES_ACCORDION_DATA} />
+        </div>
       </motion.section>
 
       <GoogleGeminiEffectDemo />
@@ -272,20 +287,34 @@ export default function App() {
 
             <D />
 
-            {/* Staggered stat count loaders */}
-            <motion.div
-              variants={staggerContainer}
-              className="grid grid-cols-2 gap-x-[4vw] gap-y-6 md:grid-cols-4"
-            >
-              {STATS.map(({ value, label }) => (
-                <motion.div variants={fadeInUp} key={label}>
-                  <StatCounter
-                    value={value}
-                    label={label}
-                  />
-                </motion.div>
-              ))}
-            </motion.div>
+            <ProfessionalMetrics 
+              metrics={[
+                {
+                  icon: 'rocket',
+                  value: '15+',
+                  label: t('metrics.card1.label'),
+                  description: t('metrics.card1.desc'),
+                },
+                {
+                  icon: 'shield',
+                  value: '100%',
+                  label: t('metrics.card2.label'),
+                  description: t('metrics.card2.desc'),
+                },
+                {
+                  icon: 'clock',
+                  value: '24h',
+                  label: t('metrics.card3.label'),
+                  description: t('metrics.card3.desc'),
+                },
+                {
+                  icon: 'star',
+                  value: '5★',
+                  label: t('metrics.card4.label'),
+                  description: t('metrics.card4.desc'),
+                }
+              ]}
+            />
 
             <D />
 

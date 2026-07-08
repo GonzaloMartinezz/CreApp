@@ -13,7 +13,7 @@ export const en = {
   "hero.tagline1": "I develop the ideal app",
   "hero.tagline2": "designed to ",
   "hero.tagline2.highlight": "boost your business.",
-  "hero.cardHeading": "Custom digital solutions: mobile apps, desktop and web systems that drive conversion and digitize your business.",
+  "hero.cardHeading": "Custom software that scales your business.",
   "hero.cardDescription": "We design and develop high-impact, efficient, and 100% customized digital solutions for your operations.",
   "hero.metricValue": 15,
   "hero.metricLabel": "Delivered Projects",
@@ -50,6 +50,14 @@ export const en = {
   "metrics.label": "04 — Operational Metrics",
   "metrics.title": "Numbers That Matter",
   "metrics.description": "Every development is backed by high code quality standards and an unwavering commitment to delivery within agreed deadlines.",
+  "metrics.card1.label": "Delivered Projects",
+  "metrics.card1.desc": "Scalable applications and systems in production.",
+  "metrics.card2.label": "Quality Commitment",
+  "metrics.card2.desc": "Robust architecture and clean code.",
+  "metrics.card3.label": "Response Rate",
+  "metrics.card3.desc": "Continuous technical support and agile methodology.",
+  "metrics.card4.label": "Satisfied Clients",
+  "metrics.card4.desc": "Transforming ideas into success stories.",
 
   // FAQ
   "faq.label": "05 — Frequently Asked Questions",

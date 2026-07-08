@@ -56,3 +56,69 @@ export const PORTFOLIO_PROJECTS = [
     image: '/ClickHouse — Departamentos en venta y alquiler - Brave 01_07_2026 23_41_52.png',
   },
 ]
+
+export const TESTIMONIALS = [
+  {
+    quote: "Gonzalo entendió exactamente lo que necesitábamos. La app quedó impecable y funciona rapidísimo.",
+    author: "María F. - Directora",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80&auto=format&fit=crop",
+    alt: "María F.",
+  },
+  {
+    quote: "Excelente profesional. Cumplió con todos los plazos y el sistema nos ahorra muchas horas de trabajo.",
+    author: "Carlos R. - Gerente",
+    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80&auto=format&fit=crop",
+    alt: "Carlos R.",
+  },
+  {
+    quote: "El e-commerce superó mis expectativas. El diseño es increíble y las ventas aumentaron de inmediato.",
+    author: "Sofía G. - Emprendedora",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80&auto=format&fit=crop",
+    alt: "Sofía G.",
+  },
+];
+
+export const FEATURES_ACCORDION_DATA = [
+  {
+    id: "gostats-app",
+    title: "GOstats - Control de Gastos",
+    count: 1,
+    iconSrc: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=100&auto=format&fit=crop&q=60", // Icono de finanzas
+    imageSrc: "/gostats.png",
+    subtitle: "Desarrollé una app para controlar todos mis gastos mensuales. Junto con mi novia logramos ahorrar y gestionar todo para identificar nuestros movimientos.",
+    link: "https://app-gostats.vercel.app/"
+  },
+  {
+    id: "personal-portfolio",
+    title: "Portafolio Personal y Blog",
+    count: 2,
+    iconSrc: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=100&auto=format&fit=crop&q=60", // Icono de código/tecnología
+    imageSrc: "/portfolio.png", // Imagen para que el usuario la agregue localmente
+    subtitle: "Sitio web personal interactivo diseñado para mostrar mis proyectos más destacados, experiencia técnica y artículos. Un espacio centralizado para compartir mi trayectoria profesional.",
+    link: "https://mi-portafolioblogg.vercel.app/"
+  },
+  {
+    id: "seamless-integrations",
+    title: "Seamless Integrations",
+    count: 18,
+    iconSrc: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?w=100&auto=format&fit=crop&q=60",
+    imageSrc: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&auto=format&fit=crop&q=80",
+    subtitle: "Connect all your favorite tools in one central hub."
+  },
+  {
+    id: "scalable-infrastructure",
+    title: "Scalable Infrastructure",
+    count: 30,
+    iconSrc: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=100&auto=format&fit=crop&q=60",
+    imageSrc: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80",
+    subtitle: "Cloud architecture built to grow with your business."
+  },
+  {
+    id: "advanced-security",
+    title: "Advanced Security",
+    count: 15,
+    iconSrc: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=100&auto=format&fit=crop&q=60",
+    imageSrc: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&auto=format&fit=crop&q=80",
+    subtitle: "Enterprise-grade encryption and data protection."
+  }
+];
