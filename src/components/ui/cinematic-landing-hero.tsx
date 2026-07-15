@@ -195,7 +195,7 @@ const BackgroundChartWave = () => (
           <stop offset="100%" stopColor="white" stopOpacity="0" />
         </linearGradient>
       </defs>
-      
+
       {/* Blurred background glow */}
       <path
         d="M 50 500 L 250 420 L 400 480 L 700 250 L 850 320 L 1150 100 L 1150 160 M 1150 100 L 1090 100"
@@ -204,7 +204,7 @@ const BackgroundChartWave = () => (
         strokeWidth="15"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="animated-wave-path filter blur-[12px]"
+        className="animated-wave-path filter blur-md"
       />
       {/* Sharp foreground line */}
       <path
@@ -217,7 +217,8 @@ const BackgroundChartWave = () => (
         className="animated-wave-path"
       />
     </svg>
-    <style dangerouslySetInnerHTML={{ __html: `
+    <style dangerouslySetInnerHTML={{
+      __html: `
       @keyframes draw-wave {
         0% { stroke-dashoffset: 3000; opacity: 0; }
         15% { opacity: 0.8; }
