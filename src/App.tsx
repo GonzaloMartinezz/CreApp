@@ -4,9 +4,10 @@ import { SocialIcons } from '@/components/ui/social-icons'
 import { D, Label } from '@/components/ui/primitives'
 import { StatCounter } from '@/components/ui/stat-counter'
 import { SERVICES, STATS, PORTFOLIO_PROJECTS, FEATURES_ACCORDION_DATA } from '@/data/constants'
-import { motion, type Variants } from 'framer-motion'
-import React, { Suspense, lazy } from 'react'
+import { motion, type Variants, AnimatePresence } from 'framer-motion'
+import React, { Suspense, lazy, useState, useEffect } from 'react'
 import { useLanguage } from '@/context/LanguageContext'
+import { TrendingUp } from 'lucide-react'
 
 // Lazy loaded components for better performance
 const GalleryHoverCarousel = lazy(() => import('@/components/ui/gallery-hover-carousel').then(m => ({ default: m.GalleryHoverCarousel })))
@@ -36,8 +37,54 @@ const staggerContainer: Variants = {
 }
 
 
+// Custom Scramble Text Component for a "Technological/Hacker" effect
+const ScrambleText = ({ text }: { text: string }) => {
+  const [displayText, setDisplayText] = useState(text);
+
+  useEffect(() => {
+    let iteration = 0;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+    const interval = setInterval(() => {
+      setDisplayText(
+        text
+          .split("")
+          .map((letter, index) => {
+            if (index < iteration) {
+              return text[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+
+      if (iteration >= text.length) {
+        clearInterval(interval);
+      }
+      iteration += 1 / 3; // Slower speed of decoding
+    }, 60); // Slower interval between frame updates
+
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return <>{displayText}</>;
+};
+
 export default function App() {
   const { t } = useLanguage()
+
+  // Dynamic verbs logic
+  const verbsString = t('hero.tagline1.verbs');
+  // Fallback verbs just in case translation key is missing
+  const verbs = verbsString === 'hero.tagline1.verbs' ? ["Desarrollo", "Diseño", "Analizo", "Enfoco"] : verbsString.split(',');
+  
+  const [verbIndex, setVerbIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVerbIndex((prev) => (prev + 1) % verbs.length);
+    }, 4000); // Slower overall interval so it doesn't rush
+    return () => clearInterval(interval);
+  }, [verbs.length]);
 
   return (
     <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center"><div className="w-8 h-8 border-4 border-accent border-t-transparent rounded-full animate-spin"></div></div>}>
@@ -50,7 +97,25 @@ export default function App() {
            ══════════════════════════════════════════════════════════════ */}
         <CinematicLandingHero
           brandName={t('hero.brandName')}
-          tagline1={t('hero.tagline1')}
+          tagline1={
+            <span className="inline-block text-center">
+              <span className="relative inline-flex items-center justify-center text-white pr-[0.3em] drop-shadow-[0_0_15px_rgba(255,255,255,0.8)]">
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={verbIndex}
+                    initial={{ opacity: 0, filter: 'blur(10px)' }}
+                    animate={{ opacity: 1, filter: 'blur(0px)' }}
+                    exit={{ opacity: 0, filter: 'blur(10px)' }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                    className="inline-block whitespace-nowrap"
+                  >
+                    <ScrambleText text={verbs[verbIndex]} />
+                  </motion.span>
+                </AnimatePresence>
+              </span>
+              <span>{t('hero.tagline1')}</span>
+            </span>
+          }
           tagline2={
             <>
               {t('hero.tagline2')}

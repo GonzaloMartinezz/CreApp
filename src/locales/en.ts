@@ -10,8 +10,9 @@ export const en = {
   
   // Hero
   "hero.brandName": "CreApp",
-  "hero.tagline1": "I develop the ideal app",
-  "hero.tagline2": "designed to ",
+  "hero.tagline1": "your ideal app,",
+  "hero.tagline1.verbs": "Develop,Design,Analyze,Focus",
+  "hero.tagline2": "to ",
   "hero.tagline2.highlight": "boost your business.",
   "hero.cardHeading": "Custom software that scales your business.",
   "hero.cardDescription": "We design and develop high-impact, efficient, and 100% customized digital solutions for your operations.",

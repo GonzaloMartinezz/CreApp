@@ -184,6 +184,55 @@ export interface CinematicHeroProps extends React.HTMLAttributes<HTMLDivElement>
   onWhatsAppClick?: () => void;
 }
 
+const BackgroundChartWave = () => (
+  <div className="absolute inset-0 z-[-2] flex items-center justify-center pointer-events-none opacity-60">
+    <svg width="100%" height="100%" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid meet" className="w-full h-full max-w-[1400px]">
+      <defs>
+        <linearGradient id="wave-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stopColor="white" stopOpacity="0" />
+          <stop offset="30%" stopColor="white" stopOpacity="1" />
+          <stop offset="80%" stopColor="white" stopOpacity="1" />
+          <stop offset="100%" stopColor="white" stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      
+      {/* Blurred background glow */}
+      <path
+        d="M 50 500 L 250 420 L 400 480 L 700 250 L 850 320 L 1150 100 L 1150 160 M 1150 100 L 1090 100"
+        fill="none"
+        stroke="url(#wave-gradient)"
+        strokeWidth="15"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="animated-wave-path filter blur-[12px]"
+      />
+      {/* Sharp foreground line */}
+      <path
+        d="M 50 500 L 250 420 L 400 480 L 700 250 L 850 320 L 1150 100 L 1150 160 M 1150 100 L 1090 100"
+        fill="none"
+        stroke="url(#wave-gradient)"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className="animated-wave-path"
+      />
+    </svg>
+    <style dangerouslySetInnerHTML={{ __html: `
+      @keyframes draw-wave {
+        0% { stroke-dashoffset: 3000; opacity: 0; }
+        15% { opacity: 0.8; }
+        85% { opacity: 0.8; }
+        100% { stroke-dashoffset: 0; opacity: 0; }
+      }
+      .animated-wave-path {
+        stroke-dasharray: 3000;
+        stroke-dashoffset: 3000;
+        animation: draw-wave 6s ease-in-out infinite;
+      }
+    `}} />
+  </div>
+);
+
 export function CinematicLandingHero({
   brandName = "CreAPP",
   tagline1 = "Creamos tu app ideal,",
@@ -321,18 +370,20 @@ export function CinematicLandingHero({
     >
       <style dangerouslySetInnerHTML={{ __html: INJECTED_STYLES }} />
       <div className="film-grain" aria-hidden="true" />
-      <div className="absolute inset-0 z-[-1] pointer-events-none opacity-100 hidden md:block">
-        {!isMobileDevice && <ParticleNetwork />}
+      <div className="absolute inset-0 z-[-1] pointer-events-none opacity-100">
+        <ParticleNetwork />
       </div>
+
+      <BackgroundChartWave />
 
       {/* BACKGROUND LAYER: Hero Texts */}
       <div className="hero-text-wrapper absolute z-10 flex flex-col items-center justify-center text-center w-screen px-4 mt-24 md:mt-0 will-change-transform transform-style-3d">
-        <h1 className="text-track gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2 pt-4 pb-4 leading-[1.1]">
+        <h1 className="text-track gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[12vw] sm:text-5xl md:text-7xl lg:text-[6rem] font-bold tracking-tight mb-2 pt-2 sm:pt-4 pb-2 sm:pb-4 leading-[1.1]">
           {tagline1}
         </h1>
-        <h1 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[2.8rem] md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pt-4 pb-4 leading-[1.1]">
+        <h2 className="text-days gsap-reveal bg-clip-text text-transparent bg-linear-to-b from-neutral-100 to-neutral-500 uppercase text-[10vw] sm:text-[2.8rem] md:text-7xl lg:text-[6rem] font-extrabold tracking-tighter pt-2 sm:pt-4 pb-2 sm:pb-4 leading-[1.1]">
           {tagline2}
-        </h1>
+        </h2>
       </div>
 
       {/* BACKGROUND LAYER 2: Tactile CTA Buttons */}
